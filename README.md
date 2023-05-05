@@ -1,70 +1,37 @@
 # BrainBeatsFM
 
-# PREFERENCES
+## Project Pitch
 
-Jay - social - gaming - activity
-Noelia - social - activity - gaming
-Jack - gaming - activity - Social
-Rich - activity - social - gaming
+### Music app (Sound-Drop) with the possibility of integrating Ai.
 
-# TECH STACK
-
-React
-MERN
-Integrate an AI?
-
-# IDEAS
-
-# Music app (Sound-Drop) with the possibility of an Ai.
-
-- Rooms that have different genres of music.
+- Rooms that have different genres of ai-generated music.
 - Users can enter into each room and listen to different genres of music.
-- AI can possibly recognise the songs from within the app.
+- Users can possibly generate songs from within the app.
 
-# Sports Results App
+## Project Setup ToDo
 
-- Use Api to gain access to sport, fixtures, results etc.
+- ~~Discuss how we will work in a team~~
+- ~~Rules; Boundaries; Sprint times, schedules etc~~
+- ~~Repo & File Structure (api / frontend)~~
+- ~~Trello board setup~~
+- ~~Dedicate time to re-visiting Acebook/React/anything that wasn’t clear in the previous project~~
 
-# Pet Sit App
+- Diagrams/Figma
 
-- An application that allows pet owners to find pet sitters.
-
-# Matchmaking App
-
-- Allows users to select games, and skill levels, to find other players to play with.
-
-# THE CHOSEN ONE
-
-MUSIC APP - BrainBeatFM
-
-# TODO
-
-- Discuss how we will work in a team
-  - Rules
-  - Boundaries
-  - Sprint times, schedules etc
-- Diagrams/Figma?
-- Repo & File Structure
-  - React App
-  - Backend
 - Technologies that we will be using.
-  - What will they require
-  - Table of the technologies we will use.
-- Trello Board
-- Dedicate time to visit/re-visit technologies.
-  - Tailwind CSS
-  - Music API
-  - AI?
-  - Next JS
-  - TypeScript?
-  - Anything that wasn’t clear in the previous project.
+
+  - What will they require?
+  - Resources on the technologies we will be using (Tailwind CSS, Music API, AI, Next.js, TypeScript)
+
 - Requirements for the app
+
   - Accounts/Tokens?
-- Mood Board (Miro)
+
+- Mood Board (Figma)
   - Websites that look good.
   - Inspiration.
 
-# MVP
+## MVP
 
 Account Set Up
 
@@ -98,16 +65,27 @@ NON-MVP FEATURES
 - Can change the order of the tracks by voting.
 - Track that is at the top of the queue will play.
 
-# TEAM
+## Tech Stack
 
-Morning stand-up - 10:00 - 10:15
-Dinner/Lunch - 12:30 - 14:00
-Retro (sprints last 2 days) - 16:30 - 17:00
-Meetings whenever necessary
+- React
+- MERN
+- Next.js
+- Typescript
+- Tailwind
+- Integrate an AI?
+- Jest (backend tests)
+- Cypress (frontend test)
 
-# TEAM/PERSONAL GOALS
+## And that's f\*\*king teamwork!!!
 
-# TEAM
+- Morning stand-up - 10:00 - 10:15
+- Dinner/Lunch - 12:30 - 14:00
+- Retro (sprints last 2 days) - 16:30 - 17:00
+- Meetings whenever necessary
+
+### TEAM/PERSONAL GOALS
+
+#### TEAM
 
 - Everyone should implement components on the app.
 - Support each-other and make sure that no-one is left behind.
@@ -116,8 +94,9 @@ Meetings whenever necessary
 - Make sure that everyone has an understanding on the app.
 - Leave comments for team members where possible.
 - If work is completed out of hours, make sure that it is spoken about when back to work hours.
+- Take breaks when stuck.
 
-# PERSONAL
+#### PERSONAL
 
 JAY -
 
@@ -147,5 +126,3 @@ RICH -
 - Create a 'simple' component
 - Create a 'complex' component
 - Get comfortable using git to create and manage branches
-
-# TAKE BREAKS WHEN STUCK
