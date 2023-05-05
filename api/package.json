@@ -1,13 +1,17 @@
 {
   "name": "api",
   "version": "0.0.0",
+  "description": "Backend api for BrainBeatsFM project",
+  "license": "CC BY-NC-SA",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www"
+    "start": "nodemon ./bin/www",
+    "start:test": "MONGODB_TEST_STR='mongodb+srv://merners-union:9tjb0iKmXPsvNAFu@brainbeatsfm-test.oc95bbe.mongodb.net/?retryWrites=true&w=majority' npm start"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
+    "dotenv": "^16.0.3",
     "express": "~4.16.1",
     "http-errors": "~1.6.3",
     "jade": "~1.11.0",
