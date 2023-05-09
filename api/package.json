@@ -6,7 +6,7 @@
   "private": true,
   "scripts": {
     "start": "nodemon ./bin/www",
-    "start:test": "MONGODB_TEST_STR='mongodb+srv://merners-union:9tjb0iKmXPsvNAFu@brainbeatsfm-test.oc95bbe.mongodb.net/?retryWrites=true&w=majority' npm start"
+    "start:test": "MONGODB_TEST_STR='mongodb://0.0.0.0/brainbeatsfm-test' npm start"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
