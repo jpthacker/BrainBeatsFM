@@ -2,12 +2,13 @@ const User = require('../models/users');
 
 const UsersController = {
   Create: (req, res) => {
+    console.log('hello')
     const user = new User(req.body);
-    user.save((err) => {
+    user.save().then((err) => {
       if (err) {
-        res.status(400).json({ message: 'Bad request' });
+        res.status(201).json({ message: "OK" });
       } else {
-        res.status(201).json({ message: 'OK' });
+        res.status(400).json({ message: "Bad Request" });
       }
     });
   },
