@@ -1,21 +1,21 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var logger = require('morgan');
-const parser = require('body-parser');
+const createError = require("http-errors");
+const express = require("express");
+const path = require("path");
+const logger = require("morgan");
+const JWT = require("jsonwebtoken");
+const parser = require("body-parser");
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+const indexRouter = require('./routes/[route]/index');
+const tokensRouter = require('./routes/[route]/tokens')
+const usersRouter = require('./routes/[route]/users');
 
 var app = express();
-
-
 
 app.use(logger('dev'));
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/users', parser.json(), usersRouter);
-app.use('/', indexRouter);
+app.use("/tokens", parser.json(), tokensRouter);
+app.use("/users", parser.json(), usersRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -34,5 +34,3 @@ app.use(function (err, req, res, next) {
 });
 
 module.exports = app;
-
-// commit

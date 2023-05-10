@@ -1,4 +1,5 @@
 const User = require('../models/users');
+const TokenGenerator = require("../models/token_generator")
 
 const UsersController = {
   Create: (req, res) => {
@@ -18,7 +19,8 @@ const UsersController = {
       if (err) {
         throw err;
       }
-      res.status(200).json({ user: user });
+      const token = TokenGenerator.jsonwebtoken(user._id);
+      res.status(200).json({ user: user, token: token });
     });
   },
 };
