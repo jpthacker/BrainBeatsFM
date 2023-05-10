@@ -6,8 +6,33 @@ export default function Home() {
       <h1 data-cy="header">BrainBeatsFM</h1>
       <div
         className="flex-1 first:h-1/2 w-full border-2 border-red-600"
-        data-cy="sign-up-form-container">
-        <form action="">Hello</form>
+        data-cy="sign-up-form-container"
+      >
+        <form data-cy="sign-up-form" action="">
+          <label data-cy="sign-up-form-label-name" htmlFor="sign-up-form-name">
+            Name
+          </label>
+          <input id="sign-up-form-name" placeholder="Name" type="text" />
+          <label
+            data-cy="sign-up-form-label-email"
+            htmlFor="sign-up-form-email"
+          >
+            Email
+          </label>
+          <input id="sign-up-form-email" placeholder="Email" type="text" />
+          <label
+            data-cy="sign-up-form-label-password"
+            htmlFor="sign-up-form-password"
+          >
+            Password
+          </label>
+          <input
+            id="sign-up-form-password"
+            placeholder="Password"
+            type="text"
+          />
+          <input data-cy="sign-up-form-btn" type="submit" value="Submit" />
+        </form>
       </div>
     </main>
   );
