@@ -4,6 +4,7 @@ describe("Home", () => {
   it("renders the homepage with the correct HTML elements", () => {
     cy.mount(<Home />);
     cy.get('[data-cy="header"]').should("contain.text", "BrainBeatsFM");
+    cy.get('[data-cy="sign-up-form-container"]').should("be.visible");
     // cy.get(".landing-text")
     //   .should("be.visible")
     //   .should("contain.text", "Miaow then turn around");
