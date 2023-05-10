@@ -129,20 +129,17 @@ RICH -
 
 ## useful commands
 
-To start MongoDB:
-
-brew services start mongodb-community@5.0
+- To start MongoDB: "brew services start mongodb-community@5.0"
 
 ### api directory
 
-connect to the database (cloud):
+- connect to the database (cloud): "npm run start"
+- connect to the test database (local): "npm run start:test"
+- run backend tests: "npm run test"
 
-npm run start
+### frontend directory
 
-connect to the test database (local):
-
-npm run start:test
-
-run backend tests:
-
-npm run test
+- run frontend server on localhost: "npm run dev"
+- run all cypress tests: "npm run test"
+- run cypress component tests: "npm run test:unit"
+- run cypress e2e tests: "npm run test:feature"
