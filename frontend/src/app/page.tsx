@@ -1,6 +1,32 @@
-import Image from "next/image";
+import React from "react";
 
 export default function Home() {
+  const [email, setEmail] = React.useState("");
+
+  const [password, setPassword] = React.useState("");
+
+  const handleSubmit = async () => {
+    const data = await fetch("/api/users", {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: email,
+        password: password,
+      }),
+    });
+    console.log(data.json());
+  };
+
+  const handleEmailChange = (event) => {
+    setEmail(event.target.value);
+  };
+
+  const handlePasswordChange = (event) => {
+    setPassword(event.target.value);
+  };
+
   return (
     <main className="flex min-h-screen min-w-screen flex-col items-center justify-between p-24">
       <h1 data-cy="header">BrainBeatsFM</h1>
@@ -19,7 +45,12 @@ export default function Home() {
           >
             Email
           </label>
-          <input id="sign-up-form-email" placeholder="Email" type="text" />
+          <input
+            data-cy="sign-up-form-input-email"
+            id="sign-up-form-email"
+            placeholder="Email"
+            type="text"
+          />
           <label
             data-cy="sign-up-form-label-password"
             htmlFor="sign-up-form-password"
@@ -27,6 +58,7 @@ export default function Home() {
             Password
           </label>
           <input
+            data-cy="sign-up-form-input-password"
             id="sign-up-form-password"
             placeholder="Password"
             type="text"

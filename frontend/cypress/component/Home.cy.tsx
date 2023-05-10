@@ -24,12 +24,18 @@ describe("Home", () => {
     cy.get('[data-cy="sign-up-form-btn"]')
       .should("be.visible")
       .should("be.enabled");
-    // cy.get(".landing-text")
-    //   .should("be.visible")
-    //   .should("contain.text", "Miaow then turn around");
-    // cy.get(".route-button")
-    //   .should("contain.text", "Sign up")
-    //   .should("be.visible")
-    //   .should("be.enabled");
+  });
+
+  it("call the /users end point", () => {
+    cy.mount(<Home />);
+    cy.intercept("POST", "/api/users", { message: "OK" }).as("newPostRequest");
+    cy.get('[data-cy="sign-up-form-input-email"]').type(
+      "someemail@anything.com"
+    );
+    cy.get('[data-cy="sign-up-form-input-password"]').type("swordfish");
+    cy.get('[data-cy="sign-up-form-btn"]').click();
+    cy.wait("@newPostRequest").then((interception) => {
+      expect(interception.response?.body.message).to.eq("OK");
+    });
   });
 });
