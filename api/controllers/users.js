@@ -1,17 +1,17 @@
-const User = require("../models/users");
+const User = require("../models/user");
 const TokenGenerator = require("../models/token_generator");
 
 const UsersController = {
   Create: (req, res) => {
-    console.log("hello");
     const user = new User(req.body);
-    user.save().then((err) => {
-      if (err) {
+    user
+      .save()
+      .then(() => {
         res.status(201).json({ message: "OK" });
-      } else {
-        res.status(400).json({ message: "Bad Request" });
-      }
-    });
+      })
+      .catch((err) => {
+        res.status(400).json({ message: "Bad request" });
+      });
   },
   Index: (req, res) => {
     const userID = req.params.userID;

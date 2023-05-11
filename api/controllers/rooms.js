@@ -1,4 +1,4 @@
-const Room = require("../models/rooms");
+const Room = require("../models/room");
 const TokenGenerator = require("../models/token_generator");
 
 const RoomController = {
