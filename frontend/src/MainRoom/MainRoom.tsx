@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 
 const MainRoom = () => {
-  const [room, setRoom] = useState("");
+  let room;
 
   useEffect(() => {
     const fetchRooms = async () => {
@@ -13,9 +13,8 @@ const MainRoom = () => {
         },
       });
       let data = await response.json();
-      setRoom(data.room);
       const room = data.room;
-      console.log(data.room);
+      console.log(data.room[0]);
     };
     fetchRooms();
   });
