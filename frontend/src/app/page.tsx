@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 
 export default function Home() {
@@ -19,51 +21,81 @@ export default function Home() {
     console.log(data.json());
   };
 
-  const handleEmailChange = (event) => {
+  const handleEmailChange = (event: {
+    target: { value: React.SetStateAction<string> };
+  }) => {
     setEmail(event.target.value);
   };
 
-  const handlePasswordChange = (event) => {
+  const handlePasswordChange = (event: {
+    target: { value: React.SetStateAction<string> };
+  }) => {
     setPassword(event.target.value);
   };
 
   return (
-    <main className="flex min-h-screen min-w-screen flex-col items-center justify-between p-24">
-      <h1 data-cy="header">BrainBeatsFM</h1>
+    <main className="flex min-h-screen min-w-screen flex-col items-center justify-center gap-12 p-24">
+      <h1 data-cy="header">Welcome to BrainBeatsFM</h1>
       <div
-        className="flex-1 first:h-1/2 w-full border-2 border-red-600"
-        data-cy="sign-up-form-container"
-      >
-        <form data-cy="sign-up-form" action="">
-          <label data-cy="sign-up-form-label-name" htmlFor="sign-up-form-name">
-            Name
-          </label>
-          <input id="sign-up-form-name" placeholder="Name" type="text" />
-          <label
-            data-cy="sign-up-form-label-email"
-            htmlFor="sign-up-form-email"
-          >
-            Email
-          </label>
+        className="py-12 flex flex-col items-center w-2/5 bg-gray-300 dark:bg-slate-800 rounded-3xl"
+        data-cy="sign-up-form-container">
+        <form
+          className="inline-flex flex-col gap-6 w-4/6"
+          data-cy="sign-up-form"
+          action="">
+          <h3 className="w-full border-b-4 border-gray-500 dark:border-white text-center py-3 mb-6">
+            Sign Up
+          </h3>
+          <div className="flex flex-col w-full gap-3 height-12 items-start justify-center">
+            <label
+              className="px-2 w-full"
+              data-cy="sign-up-form-label-name"
+              htmlFor="sign-up-form-name">
+              Name
+            </label>
+            <input
+              className="w-full p-2 rounded-md text-slate-900"
+              id="sign-up-form-name"
+              placeholder="Name"
+              type="text"
+            />
+          </div>
+          <div className="flex flex-col w-full gap-3 height-12 items-start justify-center">
+            <label
+              className="px-2 w-full"
+              data-cy="sign-up-form-label-email"
+              htmlFor="sign-up-form-email">
+              Email
+            </label>
+            <input
+              className="w-full p-2 rounded-md text-slate-900"
+              data-cy="sign-up-form-input-email"
+              id="sign-up-form-email"
+              placeholder="Email"
+              type="text"
+            />
+          </div>
+          <div className="flex flex-col w-full gap-3 height-12 items-start justify-center">
+            <label
+              className="px-2 w-full"
+              data-cy="sign-up-form-label-password"
+              htmlFor="sign-up-form-password">
+              Password
+            </label>
+            <input
+              className="w-full p-2 rounded-md text-slate-900"
+              data-cy="sign-up-form-input-password"
+              id="sign-up-form-password"
+              placeholder="Password"
+              type="password"
+            />
+          </div>
           <input
-            data-cy="sign-up-form-input-email"
-            id="sign-up-form-email"
-            placeholder="Email"
-            type="text"
+            className="mt-6 px-16 py-3 bg-white text-gray-600 rounded-md self-center hover:cursor-pointer"
+            data-cy="sign-up-form-btn"
+            type="submit"
+            value="Submit"
           />
-          <label
-            data-cy="sign-up-form-label-password"
-            htmlFor="sign-up-form-password"
-          >
-            Password
-          </label>
-          <input
-            data-cy="sign-up-form-input-password"
-            id="sign-up-form-password"
-            placeholder="Password"
-            type="text"
-          />
-          <input data-cy="sign-up-form-btn" type="submit" value="Submit" />
         </form>
       </div>
     </main>
@@ -121,54 +153,6 @@ export default function Home() {
           </h2>
           <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
             Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800 hover:dark:bg-opacity-30"
-          target="_blank"
-          rel="noopener noreferrer">
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer">
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Explore the Next.js 13 playground.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer">
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
           </p>
         </a>
       </div> */
