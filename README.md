@@ -126,3 +126,20 @@ RICH -
 - Create a 'simple' component
 - Create a 'complex' component
 - Get comfortable using git to create and manage branches
+
+## useful commands
+
+- To start MongoDB: "brew services start mongodb-community@5.0"
+
+### api directory
+
+- connect to the database (cloud): "npm run start"
+- connect to the test database (local): "npm run start:test"
+- run backend tests: "npm run test"
+
+### frontend directory
+
+- run frontend server on localhost: "npm run dev"
+- run all cypress tests: "npm run test"
+- run cypress component tests: "npm run test:unit"
+- run cypress e2e tests: "npm run test:feature"
