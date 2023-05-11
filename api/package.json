@@ -5,6 +5,7 @@
   "license": "CC BY-NC-SA",
   "private": true,
   "scripts": {
+    "test": "jest",
     "start": "nodemon ./bin/www",
     "start:test": "MONGODB_TEST_STR='mongodb://0.0.0.0/brainbeatsfm-test' npm start",
     "test": "jest"
@@ -16,6 +17,8 @@
     "express": "~4.16.1",
     "http-errors": "~1.6.3",
     "jade": "~1.11.0",
+    "jest": "^29.5.0",
+    "jsonwebtoken": "^9.0.0",
     "mongoose": "^7.1.0",
     "morgan": "~1.9.1"
   },

@@ -6,8 +6,8 @@ const nextConfig = {
   async rewrites() {
     return [
       {
-        source: "/api/users",
-        destination: "http://localhost:8080/users",
+        source: "/api/:route",
+        destination: "http://localhost:8080/:route",
       },
     ];
   },
