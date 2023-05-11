@@ -1,10 +1,10 @@
-import React from 'react'
-import MainRoom from '../../MainRoom/MainRoom'
+import React from "react";
+import MainRoom from "../components/MainRoom/MainRoom";
 
 interface Props {}
 
 const page = () => {
-  return <MainRoom />
-}
+  return <MainRoom />;
+};
 
-export default page
+export default page;

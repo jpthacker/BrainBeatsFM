@@ -1,12 +1,19 @@
 "use client";
-
-import React from "react";
-import Navbar from "../Navbar/Navbar";
+import React, { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 const Home = () => {
-  const [name, setName] = React.useState("");
-  const [email, setEmail] = React.useState("");
-  const [password, setPassword] = React.useState("");
+  const router = useRouter();
+  const [token, setToken] = useState(window.localStorage.getItem("token"));
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  useEffect(() => {
+    if (token) {
+      router.push("/rooms");
+    }
+  });
 
   const handleSubmit = async () => {
     const data = await fetch("/api/users", {
@@ -22,6 +29,7 @@ const Home = () => {
     });
     const res = await data.json();
     console.log(res.message);
+    router.push("/rooms");
   };
 
   const handleNameChange = (event: {

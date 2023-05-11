@@ -2,8 +2,6 @@
 import React from "react";
 import { useRouter } from "next/navigation";
 
-interface Props {}
-
 const Navbar = () => {
   const router = useRouter();
 
@@ -13,8 +11,12 @@ const Navbar = () => {
   };
 
   return (
-    <div className="w-screen h-30">
-      <button onClick={removeUserDetails}>Sign Out</button>
+    <div className="flex flex-row items-center justify-end w-full h-16 px-12">
+      <button
+        className="py-2 px-4 hover:pointer-cursor"
+        onClick={removeUserDetails}>
+        Sign Out
+      </button>
     </div>
   );
 };
