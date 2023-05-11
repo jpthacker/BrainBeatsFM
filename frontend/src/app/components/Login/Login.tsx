@@ -7,9 +7,8 @@ const LoginForm = () => {
   const [password, setPassword] = useState("");
   const router = useRouter();
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event: { preventDefault: () => void }) => {
     event.preventDefault();
-
     let response = await fetch("/api/tokens", {
       method: "post",
       headers: {
@@ -17,7 +16,6 @@ const LoginForm = () => {
       },
       body: JSON.stringify({ email: email, password: password }),
     });
-
     if (response.status !== 201) {
       setEmail("");
       setPassword("");
@@ -40,7 +38,7 @@ const LoginForm = () => {
   };
 
   return (
-    <section className="login">
+    <section className="flex flex-col items-center justify-center h-screen w-screen">
       <form id="login-form" className="login-form" onSubmit={handleSubmit}>
         <input
           placeholder="Email"

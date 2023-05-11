@@ -29,7 +29,7 @@ const Home = () => {
     });
     const res = await data.json();
     console.log(res.message);
-    router.push("/rooms");
+    router.push("/login");
   };
 
   const handleNameChange = (event: {
@@ -51,7 +51,7 @@ const Home = () => {
   };
 
   return (
-    <div className="flex min-h-screen min-w-screen flex-col items-center justify-center gap-12 p-24">
+    <div className="flex min-h-full min-w-full flex-col items-center justify-center gap-12 p-24">
       <h1 data-cy="header">Welcome to BrainBeatsFM</h1>
       <div
         className="py-12 flex flex-col items-center w-2/5 bg-gray-300 dark:bg-slate-800 rounded-3xl"
