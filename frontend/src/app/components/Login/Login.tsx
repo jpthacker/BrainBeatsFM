@@ -27,7 +27,7 @@ const LoginForm = () => {
       console.log(data);
       window.localStorage.setItem("token", data.token);
       window.localStorage.setItem("userID", data.userID);
-      await router.push("/");
+      await router.push("/rooms");
     }
   }
 

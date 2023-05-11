@@ -31,7 +31,17 @@ h1 {
   font-weight: bolder;
 }
 
+h2 {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
 h3 {
   font-size: 1.25rem;
   font-weight: bold;
+}
+
+p {
+  font-size: 1.15rem;
+  font-weight: normal;
 }

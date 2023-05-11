@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import LoginForm from "../../Login/Login";
-import Navbar from "../../Navbar/Navbar";
+import LoginForm from "../components/Login/Login";
+import Navbar from "../components/Navbar/Navbar";
 
 interface Props {}
 
