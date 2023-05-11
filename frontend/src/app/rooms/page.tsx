@@ -1,12 +1,10 @@
 import React from 'react'
-import Navbar from '../Navbar/Navbar'
+import MainRoom from '../../MainRoom/MainRoom'
 
 interface Props {}
 
 const page = () => {
-  return (
-    <Navbar />
-  )
+  return <MainRoom />
 }
 
 export default page
