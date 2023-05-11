@@ -3,8 +3,18 @@ const User = require("../../models/user");
 require("../mongodb_helper");
 
 describe("User model", () => {
+  it("it has a username", () => {
+    const user = new User({
+      name: "John Doe",
+      email: "someemail@anything.com",
+      password: "swordfish",
+    });
+    expect(user.name).toEqual("John Doe");
+  });
+
   it("it has an email address", () => {
     const user = new User({
+      name: "John Doe",
       email: "someemail@anything.com",
       password: "swordfish",
     });
@@ -13,6 +23,7 @@ describe("User model", () => {
 
   it("it has a password", () => {
     const user = new User({
+      name: "John Doe",
       email: "someemail@anything.com",
       password: "swordfish",
     });

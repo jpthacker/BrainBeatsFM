@@ -8,9 +8,10 @@ describe("/users", () => {
     await User.deleteMany({}).exec();
   });
 
-  describe("POST, when email and password are provided", () => {
+  describe("POST, when name, email and password are provided", () => {
     test("the response code is 201", async () => {
       let response = await request(app).post("/users").send({
+        name: "John Doe",
         email: "someemail@anything.com",
         password: "Swordfish",
       });
@@ -19,6 +20,7 @@ describe("/users", () => {
 
     test("a new user is created", async () => {
       await request(app).post("/users").send({
+        name: "John Doe",
         email: "someemail@anything.com",
         password: "Swordfish",
       });
@@ -28,9 +30,10 @@ describe("/users", () => {
     });
   });
 
-  describe("POST, when email is missing", () => {
+  describe("POST, when name is missing", () => {
     test("the response code is 400", async () => {
       let response = await request(app).post("/users").send({
+        email: "someemail@anything.com",
         password: "Swordfish",
       });
       expect(response.statusCode).toBe(400);
@@ -38,6 +41,26 @@ describe("/users", () => {
 
     test("a new user is not created", async () => {
       await request(app).post("/users").send({
+        email: "someemail@anything.com",
+        password: "Swordfish",
+      });
+      let users = await User.find().exec();
+      expect(users.length).toEqual(0);
+    });
+  });
+
+  describe("POST, when email is missing", () => {
+    test("the response code is 400", async () => {
+      let response = await request(app).post("/users").send({
+        name: "John Doe",
+        password: "Swordfish",
+      });
+      expect(response.statusCode).toBe(400);
+    });
+
+    test("a new user is not created", async () => {
+      await request(app).post("/users").send({
+        name: "John Doe",
         password: "Swordfish",
       });
       let users = await User.find().exec();
@@ -48,6 +71,7 @@ describe("/users", () => {
   describe("POST, when password is missing", () => {
     test("the response code is 400", async () => {
       let response = await request(app).post("/users").send({
+        name: "John Doe",
         email: "someemail@anything.com",
       });
       expect(response.statusCode).toBe(400);
@@ -56,6 +80,7 @@ describe("/users", () => {
 
     test("a new user is not created", async () => {
       await request(app).post("/users").send({
+        name: "John Doe",
         email: "someemail@anything.com",
       });
       let users = await User.find().exec();
