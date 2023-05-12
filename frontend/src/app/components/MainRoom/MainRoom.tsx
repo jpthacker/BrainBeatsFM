@@ -1,8 +1,9 @@
 "use client";
+import { set } from "mongoose";
 import React, { useState, useEffect } from "react";
 
 const MainRoom = () => {
-  const [room, setRoom] = useState("");
+  const [room, setRoom] = useState([]);
 
   useEffect(() => {
     const fetchRooms = async () => {
@@ -14,15 +15,22 @@ const MainRoom = () => {
       });
       let data = await response.json();
       setRoom(data.room);
-      const room = data.room;
-      console.log(data.room);
+      console.log(data.room)
     };
     fetchRooms();
-  });
+  }, []);
 
   return (
-    <p>{room}</p>
+    <div>
+      {room.map((r) => (
+        <div key={r['_id']}>
+          <h1>{r['name']}</h1>
+          <p>{r['description']}</p>
+        </div>
+      ))}
+    </div>
   )
+  
 };
 
 export default MainRoom;
