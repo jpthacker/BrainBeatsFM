@@ -69,7 +69,7 @@ const Home = () => {
               Name
             </label>
             <input
-              className="w-full p-2 rounded-md text-slate-900"
+              className="w-full p-2 rounded-md text-slate-900 dark:bg-gray-700 dark:text-[#D9D9D9]"
               id="sign-up-form-name"
               placeholder="Name"
               type="text"
@@ -84,7 +84,7 @@ const Home = () => {
               Email
             </label>
             <input
-              className="w-full p-2 rounded-md text-slate-900"
+              className="w-full p-2 rounded-md text-slate-900 dark:bg-gray-700 dark:text-[#D9D9D9]"
               data-cy="sign-up-form-input-email"
               id="sign-up-form-email"
               placeholder="Email"
@@ -100,7 +100,7 @@ const Home = () => {
               Password
             </label>
             <input
-              className="w-full p-2 rounded-md text-slate-900"
+              className="w-full p-2 rounded-md text-slate-900 dark:bg-gray-700 dark:text-[#D9D9D9]"
               data-cy="sign-up-form-input-password"
               id="sign-up-form-password"
               placeholder="Password"

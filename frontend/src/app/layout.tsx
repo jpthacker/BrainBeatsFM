@@ -20,7 +20,7 @@ export default function RootLayout({
         <nav className="absolute w-screen">
           <Navbar />
         </nav>
-        <main className="min-h-screen min-w-screen dark:bg-gradient-to-r from-blue-950 to to-gray-800">
+        <main className="min-h-screen min-w-screen dark:bg-gradient-to-r from-[#222558] to to-[#202136]">
           {children}
         </main>
       </body>
