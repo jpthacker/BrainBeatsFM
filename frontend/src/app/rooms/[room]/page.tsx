@@ -1,9 +1,5 @@
-import { FC } from "react";
+import Room from "@/components/Room/Room";
 
-interface pageProps {}
-
-const page: FC<pageProps> = ({}) => {
-  return <div>page</div>;
-};
-
-export default page;
+export default function RoomPage() {
+  return <div>{<Room />}</div>;
+}
