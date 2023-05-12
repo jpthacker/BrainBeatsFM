@@ -1,19 +1,12 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 
 const Home = () => {
   const router = useRouter();
-  const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
-  useEffect(() => {
-    if (token) {
-      router.push("/rooms");
-    }
-  });
 
   const handleSubmit = async () => {
     const data = await fetch("/api/users", {
