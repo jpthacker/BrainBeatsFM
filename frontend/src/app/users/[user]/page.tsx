@@ -2,6 +2,7 @@
 import React, { FC, useState, useEffect } from 'react';
 import { isEmpty } from 'lodash';
 import {useRouter} from 'next/navigation'
+import Image from "next/image";
 
 interface pageProps {
     params: {name: string}
@@ -44,9 +45,16 @@ const page: FC<pageProps> = ({ params }) => {
     }
 
     return (
-        <div>
-            <img src={user["image"]} alt="" />
-            <p>{user["name"]}</p>
+        <div className="w-full h-12 my-16 px-16">
+            <div className="flex">
+                <Image className="border-2 border-white rounded-full" src={user["image"]} alt="Profile picture" width={250} height={250} />
+                <div className="flex min-h-full w-full flex-row items-center ml-16">
+                    <div>
+                        <h2 className="w-full">{user["name"]}</h2>
+                        <p className="block">hi</p>
+                    </div>
+                </div>
+            </div>
         </div>
     )
 
