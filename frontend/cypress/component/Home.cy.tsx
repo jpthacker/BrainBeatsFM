@@ -1,4 +1,4 @@
-import SignUpForm from "../../src/app/components/SignUpForm/SignUpForm";
+import SignUpForm from "../../src/components/SignUpForm/SignUpForm";
 
 describe("Home", () => {
   it("renders the homepage with the correct HTML elements", () => {
