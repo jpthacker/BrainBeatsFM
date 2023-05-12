@@ -30,6 +30,9 @@ yarn-error.log*
 # vercel
 .vercel
 
-# typescript
+# typescriptß
 *.tsbuildinfo
 next-env.d.ts
+
+#cypress
+/cypress/e2e/2-advanced-examples
