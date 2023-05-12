@@ -23,16 +23,18 @@ const MainRoom = () => {
 
   const handleOpenRoom = (_roomId: any) => {
     router.push(`/rooms/${_roomId}`);
+    // tell the app which room has been opened.
+    window.localStorage.setItem("roomId", _roomId);
   };
 
   return (
     <div className="grid grid-cols-3 gap-4 place-items-stretch h-56 p-24">
       {rooms.map((r) => (
         <div
-          className="flex min-w-screen flex-col items-center justify-center gap-12 p-24 rounded-3xl bg-gray-300 dark:bg-slate-800"
+          className="flex min-w-screen flex-col items-center justify-center gap-12 p-24 rounded-3xl bg-gray-300 dark:bg-slate-800 hover: cursor-pointer"
           key={r["_id"]}
           onClick={() => {
-            handleOpenRoom(`${r["name"]}`);
+            handleOpenRoom(`${r["_id"]}`);
           }}>
           <h2>{r["name"]}</h2>
           <p>{r["description"]}</p>
