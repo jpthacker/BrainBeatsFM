@@ -47,7 +47,7 @@ const Home = () => {
     <div className="flex min-h-full min-w-full flex-col items-center justify-center gap-12 p-24">
       <h1 data-cy="header">Welcome to BrainBeatsFM</h1>
       <div
-        className="py-12 flex flex-col items-center w-1/3 bg-gray-300 dark:bg-slate-800 rounded-3xl shadow-xl"
+        className="py-12 flex flex-col items-center w-1/3 bg-gray-300 dark:bg-[#27273F] rounded-3xl shadow-xl"
         data-cy="sign-up-form-container">
         <form
           className="inline-flex flex-col gap-6 w-4/6"
@@ -57,7 +57,7 @@ const Home = () => {
             handleSubmit();
           }}>
           <div className="h-full w-full bg-gradient-to-r from-orange-600 to-pink-400 pb-1">
-            <h3 className="h-full w-full  bg-gray-300 dark:bg-slate-800 text-center py-3">
+            <h3 className="h-full w-full  bg-gray-300 dark:bg-[#27273F] text-center py-3">
               Sign Up
             </h3>
           </div>
@@ -109,7 +109,7 @@ const Home = () => {
             />
           </div>
           <input
-            className="mt-6 px-16 py-3 bg-white text-gray-600 rounded-md self-center hover:cursor-pointer"
+            className="mt-6 px-16 py-3 bg-gradient-to-r from-orange-600 to-pink-400 rounded-md self-center font-bold hover:cursor-pointer hover:bg-none hover:bg-rose-400"
             data-cy="sign-up-form-btn"
             type="submit"
             value="Submit"
