@@ -1,8 +1,8 @@
 import "./globals.css";
-import { Inter } from "next/font/google";
+import { Montserrat } from "next/font/google";
 import Navbar from "./components/Navbar/Navbar";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Montserrat({ subsets: ["latin"] });
 
 export const metadata = {
   title: "Create Next App",
