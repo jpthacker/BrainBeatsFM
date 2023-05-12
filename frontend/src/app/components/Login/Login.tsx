@@ -26,6 +26,7 @@ const LoginForm = () => {
       let data = await response.json();
       
       console.log(data);
+      window.localStorage.setItem("username", data.username);
       window.localStorage.setItem("token", data.token);
       window.localStorage.setItem("userID", data.userID);
       await router.push("/rooms");

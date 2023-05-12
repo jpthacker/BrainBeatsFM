@@ -19,10 +19,20 @@ const UsersController = {
       if (err) {
         throw err;
       }
+      console.log("test", user)
       const token = TokenGenerator.jsonwebtoken(user._id);
-      res.status(200).json({ user: user, token: token });
+      res.status(200).json({ user: user, cheese: "cheese", token: token });
     });
   },
+  All: async (req, res) => {
+    try {
+      const users = await User.find().exec();
+      res.status(200).json({ users: users });
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ error: "Server error" });
+    }
+  },  
 };
 
 module.exports = UsersController;

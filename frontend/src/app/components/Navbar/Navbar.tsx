@@ -10,8 +10,18 @@ const Navbar = () => {
     await router.push("/login");
   };
 
+  const routeToProfile = async () => {
+    let userID = window.localStorage.getItem("username")
+    await router.push(`/users/${userID}`)
+  }
+
   return (
     <div className="flex flex-row items-center justify-end w-full h-16 px-12">
+      <button
+        className="py-2 px-4 hover:pointer-cursor"
+        onClick={routeToProfile}>
+        Profile
+      </button>
       <button
         className="py-2 px-4 hover:pointer-cursor"
         onClick={removeUserDetails}>
