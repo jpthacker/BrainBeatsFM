@@ -1,13 +1,13 @@
-'use client';
-import { useRouter } from 'next/navigation';
-import React, { useState } from 'react';
+"use client";
+import { useRouter } from "next/navigation";
+import React, { useState } from "react";
 
 const LoginForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
-  
-  const handleSubmit = async (event) => {
+
+  const handleSubmit = async (event: { preventDefault: () => void }) => {
     event.preventDefault();
 
     let response = await fetch("/api/tokens", {
@@ -18,12 +18,13 @@ const LoginForm = () => {
       body: JSON.stringify({ email: email, password: password }),
     });
 
-    if(response.status !== 201) {
-      setEmail("")
-      setPassword("")
-      console.log(response)
+    if (response.status !== 201) {
+      setEmail("");
+      setPassword("");
+      console.log(response);
     } else {
-      let data = await response.json()
+      let data = await response.json();
+      
       console.log(data);
       window.localStorage.setItem("token", data.token);
       window.localStorage.setItem("userID", data.userID);

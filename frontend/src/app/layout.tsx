@@ -17,8 +17,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Navbar />
-        <main>{children}</main>
+        <nav className="absolute w-screen">
+          <Navbar />
+        </nav>
+        <main className="min-h-screen min-w-screen">{children}</main>
       </body>
     </html>
   );
