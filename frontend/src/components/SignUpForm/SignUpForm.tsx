@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 
-const Home = () => {
+const SignUpForm = () => {
   const router = useRouter();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -44,10 +44,10 @@ const Home = () => {
   };
 
   return (
-    <div className="flex min-h-screen min-w-screen flex-col items-center justify-center gap-12 p-24">
+    <div className="flex min-h-full min-w-full flex-col items-center justify-center gap-12 border-2 border-white">
       <h1 data-cy="header">Welcome to BrainBeatsFM</h1>
       <div
-        className="py-12 flex flex-col items-center w-1/3 bg-gray-300 dark:bg-[#27273F] rounded-3xl shadow-xl"
+        className="flex-1 flex-col items-center w-1/3 bg-gray-300 dark:bg-[#27273F] rounded-3xl shadow-xl"
         data-cy="sign-up-form-container">
         <form
           className="inline-flex flex-col gap-6 w-4/6"
@@ -120,4 +120,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default SignUpForm;
