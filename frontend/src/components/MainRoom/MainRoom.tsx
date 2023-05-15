@@ -15,16 +15,16 @@ const MainRoom = () => {
         },
       });
       let data = await response.json();
-      setRooms(data.room);
-      console.log(data.room);
+      setRooms(data.rooms);
+      console.log(data.rooms);
     };
     fetchRooms();
   }, []);
 
-  const handleOpenRoom = (_roomId: any) => {
-    router.push(`/rooms/${_roomId}`);
+  const handleOpenRoom = (name: any) => {
+    router.push(`/rooms/${name}`);
     // tell the app which room has been opened.
-    window.localStorage.setItem("roomId", _roomId);
+    window.localStorage.setItem("roomName", name);
   };
 
   return (
@@ -34,7 +34,7 @@ const MainRoom = () => {
           className="flex min-w-screen flex-col items-center justify-center gap-12 p-24 rounded-3xl bg-gray-300 dark:bg-slate-800 hover: cursor-pointer"
           key={r["_id"]}
           onClick={() => {
-            handleOpenRoom(`${r["_id"]}`);
+            handleOpenRoom(`${r["name"]}`);
           }}>
           <h2>{r["name"]}</h2>
           <p>{r["description"]}</p>
