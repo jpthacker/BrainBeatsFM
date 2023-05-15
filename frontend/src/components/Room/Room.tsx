@@ -49,15 +49,23 @@ const Room = () => {
   }, []);
 
   return (
-    <div className="min-w-screen min-h-screen p-16">
-      <h2>{room.data.name}</h2>
-      <h3>{`A room dedicated to AI ${room.data.name} music`}</h3>
+    <div className="flex flex-col min-w-screen min-h-screen p-16">
+      <div className="min-w-full flex flex-col items-start justify-around gap-4 py-12">
+        <h2 className="capitalize">{room.data.name}</h2>
+        <h3>{`A room dedicated to AI ${room.data.name} music`}</h3>
+      </div>
       <div className="">
         {tracks.map((t) => (
-          <div className="border-2 border-green-600" key={t["_id"]}>
-            <h2>{t["title"]}</h2>
-            <p>{t["owner"]}</p>
-            <p>{t["description"]}</p>
+          <div
+            className="flex flex-col items-start justify-center p-6 rounded-xl bg-gray-300 dark:bg-[#27273F]"
+            key={t["_id"]}>
+            <h2 className="mb-1">{t["title"]}</h2>
+            <p className="mb-4">{t["owner"]}</p>
+            <div className="bg-gradient-to-r from-orange-600 to-pink-400 pt-1">
+              <p className="bg-gray-300 dark:bg-[#27273F] text-center py-3">
+                {t["description"]}
+              </p>
+            </div>
             <audio controls>
               <source src={t["url"]} type="audio/mpeg" />
             </audio>
