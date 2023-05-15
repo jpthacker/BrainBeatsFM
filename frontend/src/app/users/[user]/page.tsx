@@ -23,6 +23,7 @@ const page: FC<pageProps> = ({ params }) => {
                 },
             });
             let data = await response.json();
+            console.log(data)
             const filteredUser = data.users.filter(user => user.name === params['user'])
             isEmpty(filteredUser) ? (setUser([]), setUserFound(false)) : setUser(filteredUser[0]);
         };
@@ -44,20 +45,47 @@ const page: FC<pageProps> = ({ params }) => {
         router.push("/404")
     }
 
-    return (
-        <div className="w-full h-12 my-16 px-16">
-            <div className="flex">
-                <Image className="border-2 border-white rounded-full" src={user["image"]} alt="Profile picture" width={250} height={250} />
-                <div className="flex min-h-full w-full flex-row items-center ml-16">
-                    <div>
-                        <h2 className="w-full">{user["name"]}</h2>
-                        <p className="block">hi</p>
+    const routeToEdit = async () => {
+        
+        await router.push(`users/${user["name"]}/edit`)
+    }
+
+    if (myProfile === true){
+        return (
+            <div className="w-full h-12 my-16 px-16">
+                <div className="flex">
+                    <Image className="border-2 border-white rounded-full" src={user["image"]} alt="Profile picture" width={250} height={250} />
+                    <div className="flex min-h-full w-full flex-row items-center ml-16">
+                        <div className="grid grid-cols-2 w-full">
+                            <div className="w-80">
+                                <h2 className="w-full">{user["name"]}</h2>
+                                <p className="block">hi</p>
+                            </div>
+                            <div>
+                                <button onClick={routeToEdit}>Edit</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    )
-
+        )
+    } else {
+        return (
+            <div className="w-full h-12 my-16 px-16">
+                <div className="flex">
+                    <Image className="border-2 border-white rounded-full" src={user["image"]} alt="Profile picture" width={250} height={250} />
+                    <div className="flex min-h-full w-full flex-row items-center ml-16">
+                        <div className="w-full">
+                            <div className="w-80">
+                                <h2 className="w-full">{user["name"]}</h2>
+                                <p className="block">hi</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        )
+    }
 }
 
 
