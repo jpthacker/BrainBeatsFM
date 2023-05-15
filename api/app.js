@@ -19,7 +19,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/tokens", parser.json(), tokensRouter);
 app.use("/users", parser.json(), usersRouter);
 app.use("/rooms", parser.json(), roomsRouter);
-app.use("/tracks", tracksRouter);
+app.use("/tracks", parser.json(), tracksRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
