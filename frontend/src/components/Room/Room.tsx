@@ -1,13 +1,13 @@
-/* eslint-disable react-hooks/exhaustive-deps */
+"use client";
 import React from "react";
 
 const Room = () => {
-  const [roomId, setRoomId] = React.useState(
-    window.localStorage.getItem("roomId")
-  );
+  const [roomId, setRoomId] = React.useState("");
   const [room, setRoom] = React.useState();
 
   React.useEffect(() => {
+    const localRoomId: string = window.localStorage.getItem("roomID")!;
+    setRoomId(localRoomId);
     const fetchRoom = async () => {
       let response = await fetch(`/api/rooms/${roomId}`, {
         method: "get",
