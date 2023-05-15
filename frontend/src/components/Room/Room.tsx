@@ -1,5 +1,4 @@
 "use client";
-import { log } from "console";
 import React from "react";
 
 const Room = () => {
@@ -35,7 +34,12 @@ const Room = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return <div>{room.data.name}</div>;
+  return (
+    <div className="min-w-screen min-h-screen p-16">
+      <h2>{room.data.name}</h2>
+      <h3>{`A room dedicated to AI ${room.data.name} music`}</h3>
+    </div>
+  );
 };
 
 export default Room;
