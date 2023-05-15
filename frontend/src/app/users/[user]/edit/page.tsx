@@ -48,21 +48,16 @@ const page = () => {
     };
 
     return (
-        <div>
-            <form onSubmit={(e) => {
+        <div className="m-16">
+            <form className="relative w-full" onSubmit={(e) => {
             e.preventDefault();
             fetchUserProfile();
             window.localStorage.setItem("username", name)
             window.localStorage.setItem("password", password)
             window.localStorage.setItem("image", image)
           }}>
-                <label>Your current username is - {name}</label>
-                <input type="text" onChange={handleNameChange} />
 
-                <label>Your current password is - {password}</label>
-                <input type="text" onChange={handlePasswordChange} />
-
-                <label>Your current profile picture - cheese</label>
+                <label className="flex w-full">Profile Picture</label>
                 <select
                     name="image-field"
                     id="sign-up-form-image"
@@ -80,7 +75,13 @@ const page = () => {
                     <option value="violin">Violin</option>
                 </select>
 
-                <input type="submit" value="Submit" />
+                <label className="flex w-full">Username - {name}</label>
+                <input type="text" onChange={handleNameChange} />
+
+                <label className="flex w-full">Password - {password}</label>
+                <input type="text" onChange={handlePasswordChange} />
+
+                <input className="flex w-full" type="submit" value="Submit" />
             </form>
         </div>
     )
