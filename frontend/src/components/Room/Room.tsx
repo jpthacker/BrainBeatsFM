@@ -14,7 +14,6 @@ const Room = () => {
 
   React.useEffect(() => {
     const localRoomName: string = window.localStorage.getItem("roomName")!;
-    console.log(localRoomName);
 
     const fetchRoom = async () => {
       let response = await fetch(`/api/rooms/${localRoomName}`, {
@@ -27,7 +26,6 @@ const Room = () => {
       let data = await response.json();
       window.localStorage.setItem("token", data.token);
       setRoom({ data: data.room, loading: false });
-      console.log(data.room);
     };
 
     fetchRoom();
