@@ -3,6 +3,8 @@ import React, { FC, useState, useEffect } from 'react';
 import { isEmpty } from 'lodash';
 import {useRouter} from 'next/navigation'
 import Image from "next/image";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPencilAlt } from '@fortawesome/fontawesome-free-solid'
 
 interface pageProps {
     params: {name: string}
@@ -52,17 +54,17 @@ const page: FC<pageProps> = ({ params }) => {
 
     if (myProfile === true){
         return (
-            <div className="w-full h-12 my-16 px-16">
+            <div className="w-full h-12 py-16 px-16">
                 <div className="flex">
                     <Image className="border-2 border-white rounded-full" src={user["image"]} alt="Profile picture" width={250} height={250} />
                     <div className="flex min-h-full w-full flex-row items-center ml-16">
                         <div className="grid grid-cols-2 w-full">
                             <div className="w-80">
                                 <h2 className="w-full">{user["name"]}</h2>
-                                <p className="block">hi</p>
+                                <p className="block">GENERES GO HERE</p>
                             </div>
-                            <div>
-                                <button onClick={routeToEdit}>Edit</button>
+                            <div className="flex justify-end">
+                                <button onClick={routeToEdit}><FontAwesomeIcon className="pr-2 text-orange-600" icon={faPencilAlt} />Edit Profile</button>
                             </div>
                         </div>
                     </div>
@@ -71,14 +73,14 @@ const page: FC<pageProps> = ({ params }) => {
         )
     } else {
         return (
-            <div className="w-full h-12 my-16 px-16">
+            <div className="w-full h-12 py-16 px-16">
                 <div className="flex">
                     <Image className="border-2 border-white rounded-full" src={user["image"]} alt="Profile picture" width={250} height={250} />
                     <div className="flex min-h-full w-full flex-row items-center ml-16">
                         <div className="w-full">
                             <div className="w-80">
                                 <h2 className="w-full">{user["name"]}</h2>
-                                <p className="block">hi</p>
+                                <p className="block">GENRES GO HERE</p>
                             </div>
                         </div>
                     </div>

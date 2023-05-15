@@ -12,6 +12,7 @@ const Home = () => {
 
   const imageOptions = {
     defaultPicture: "/images/default-picture.png",
+    synthwave: "/images/synthwave.png",
     cello: "/images/cello.png",
     clarinet: "/images/clarinet.png",
     guitarPlayer: "/images/guitar-player.png",
@@ -109,6 +110,7 @@ const Home = () => {
               <option value="mc">Mic Controller</option>
               <option value="rockGuitar">Rock Guitar</option>
               <option value="violin">Violin</option>
+              <option value="synthwave">Synthwave</option>
             </select>
           </div>
           <div className="flex flex-col w-full gap-3 height-12 items-start justify-center">
