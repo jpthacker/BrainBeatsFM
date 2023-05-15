@@ -38,6 +38,8 @@ const Room = () => {
         },
       });
       let data = await response.json();
+      console.log(data.tracks);
+
       setTracks(data.tracks);
     };
 
@@ -56,6 +58,9 @@ const Room = () => {
             <h2>{t["title"]}</h2>
             <p>{t["owner"]}</p>
             <p>{t["description"]}</p>
+            <audio controls>
+              <source src={t["url"]} type="audio/mpeg" />
+            </audio>
           </div>
         ))}
       </div>
