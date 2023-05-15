@@ -1,11 +1,8 @@
 import React, { useState } from "react";
-import LoginForm from "../../Login/Login";
-import Navbar from "../../Navbar/Navbar";
-
-interface Props {}
+import LoginForm from "../components/Login/Login";
 
 const login = () => {
-  return <LoginForm />
+  return <LoginForm />;
 };
 
 export default login;
