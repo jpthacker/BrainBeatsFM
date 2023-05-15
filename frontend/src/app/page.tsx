@@ -1,12 +1,27 @@
 "use client";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 const Home = () => {
   const router = useRouter();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [image, setImage] = useState("/images/default-picture.png");
+
+  const imageOptions = {
+    defaultPicture: "/images/default-picture.png",
+    cello: "/images/cello.png",
+    clarinet: "/images/clarinet.png",
+    guitarPlayer: "/images/guitar-player.png",
+    guitar: "/images/guitar.png",
+    headphones: "/images/headphones.png",
+    keyboard: "/images/keyboard.png",
+    mc: "/images/mc.png",
+    rockGuitar: "/images/rock-guitar.png",
+    violin: "/images/violin.png",
+  };
 
   const handleSubmit = async () => {
     const data = await fetch("/api/users", {
@@ -18,6 +33,7 @@ const Home = () => {
         name: name,
         email: email,
         password: password,
+        image: image,
       }),
     });
     const res = await data.json();
@@ -43,6 +59,11 @@ const Home = () => {
     setPassword(event.target.value);
   };
 
+  const handleImageChange = (event) => {
+    const selectedImage = event.target.value;
+    setImage(imageOptions[selectedImage]);
+  };
+
   return (
     <div className="flex min-h-screen min-w-screen flex-col items-center justify-center gap-12 p-24">
       <h1 data-cy="header">Welcome to BrainBeatsFM</h1>
@@ -62,10 +83,40 @@ const Home = () => {
             </h3>
           </div>
           <div className="flex flex-col w-full gap-3 height-12 items-start justify-center">
+            <div className="w-full flex flex-col items-center mb-6">
+              <Image className="border-2 border-white rounded-full" src={image} alt="Profile picture" width={125} height={125} />
+            </div>
+            <label
+              className="px-2 w-full"
+              data-cy="sign-up-form-label-img"
+              htmlFor="sign-up-form-img"
+            >
+              Profile Picture
+            </label>
+            <select
+              className="w-full p-2 rounded-md text-slate-900"
+              name="image-field"
+              id="sign-up-form-image"
+              onChange={handleImageChange}
+            >
+              <option value="defaultPicture">Default Image</option>
+              <option value="cello">Cello</option>
+              <option value="clarinet">Clarinet</option>
+              <option value="guitarPlayer">Guitar Player</option>
+              <option value="guitar">Guitar</option>
+              <option value="headphones">Headphones</option>
+              <option value="keyboard">Keyboard</option>
+              <option value="mc">Mic Controller</option>
+              <option value="rockGuitar">Rock Guitar</option>
+              <option value="violin">Violin</option>
+            </select>
+          </div>
+          <div className="flex flex-col w-full gap-3 height-12 items-start justify-center">
             <label
               className="px-2 w-full"
               data-cy="sign-up-form-label-name"
-              htmlFor="sign-up-form-name">
+              htmlFor="sign-up-form-name"
+            >
               Name
             </label>
             <input
@@ -80,7 +131,8 @@ const Home = () => {
             <label
               className="px-2 w-full"
               data-cy="sign-up-form-label-email"
-              htmlFor="sign-up-form-email">
+              htmlFor="sign-up-form-email"
+            >
               Email
             </label>
             <input
@@ -96,7 +148,8 @@ const Home = () => {
             <label
               className="px-2 w-full"
               data-cy="sign-up-form-label-password"
-              htmlFor="sign-up-form-password">
+              htmlFor="sign-up-form-password"
+            >
               Password
             </label>
             <input
