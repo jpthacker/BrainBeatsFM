@@ -1,6 +1,6 @@
 import "./globals.css";
 import { Montserrat } from "next/font/google";
-import Navbar from "./components/Navbar/Navbar";
+import Navbar from "../components/Navbar/Navbar";
 
 const inter = Montserrat({ subsets: ["latin"] });
 
@@ -17,12 +17,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <nav className="w-screen">
+        <nav className="absolute w-screen">
           <Navbar />
         </nav>
-        <main className="min-h-screen min-w-screen dark:bg-gradient-to-r from-[#222558] to to-[#202136]">
-          {children}
-        </main>
+        <main className="min-h-screen min-w-screen">{children}</main>
       </body>
     </html>
   );

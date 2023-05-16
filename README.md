@@ -133,13 +133,13 @@ RICH -
 
 ### api directory
 
-- connect to the database (cloud): "npm run start"
-- connect to the test database (local): "npm run start:test"
-- run backend tests: "npm run test"
+- connect to the database (cloud): "JWT_SECRET=SUPER_SECRET npm run start"
+- connect to the test database (local): " JWT_SECRET=SUPER_SECRETnpm run start:test"
+- run backend tests: "JWT_SECRET=SUPER_SECRET npm run test"
 
 ### frontend directory
 
-- run frontend server on localhost: "npm run dev"
-- run all cypress tests: "npm run test"
-- run cypress component tests: "npm run test:unit"
-- run cypress e2e tests: "npm run test:feature"
+- run frontend server on localhost: "JWT_SECRET=SUPER_SECRET npm run dev"
+- run all cypress tests: "JWT_SECRET=SUPER_SECRET npm run test"
+- run cypress component tests: "JWT_SECRET=SUPER_SECRET npm run test:unit"
+- run cypress e2e tests: "JWT_SECRET=SUPER_SECRET npm run test:feature"

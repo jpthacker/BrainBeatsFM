@@ -44,10 +44,10 @@ const SignUpForm = () => {
   };
 
   return (
-    <div className="flex min-h-full min-w-full flex-col items-center justify-center gap-12 border-2 border-white">
+    <div className="flex min-h-full min-w-full flex-col items-center justify-center gap-12 p-24">
       <h1 data-cy="header">Welcome to BrainBeatsFM</h1>
       <div
-        className="flex-1 flex-col items-center w-1/3 bg-gray-300 dark:bg-[#27273F] rounded-3xl shadow-xl"
+        className="py-12 flex flex-col items-center w-1/3 bg-gray-300 dark:bg-[#27273F] rounded-3xl shadow-xl"
         data-cy="sign-up-form-container">
         <form
           className="inline-flex flex-col gap-6 w-4/6"
