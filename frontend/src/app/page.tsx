@@ -30,7 +30,8 @@ const Home = () => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        name: name,
+        name: name, 
+        // change
         email: email,
         password: password,
         image: image,
