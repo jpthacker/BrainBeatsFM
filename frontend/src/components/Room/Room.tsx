@@ -1,5 +1,6 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
+import WaveSurfer from "wavesurfer.js";
 
 const Room = () => {
   interface Room {
@@ -12,6 +13,7 @@ const Room = () => {
     loading: boolean;
   }>({ data: { name: "room" }, loading: true });
   const [tracks, setTracks] = React.useState([]);
+  const [playing, setPlaying] = React.useState(false);
 
   React.useEffect(() => {
     const localRoomName: string = window.localStorage.getItem("roomName")!;
@@ -48,6 +50,18 @@ const Room = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  useEffect(() => {
+    if (playing) {
+      var wavesurfer = WaveSurfer.create({
+        container: "#waveform",
+      });
+      wavesurfer.load(tracks[0]["url"]);
+      wavesurfer.on("ready", function () {
+        wavesurfer.play();
+      });
+    }
+  }, [playing]);
+
   return (
     <div className="flex flex-col min-w-screen min-h-screen p-16">
       <div className="min-w-full flex flex-col items-start justify-around gap-4 py-12">
@@ -59,7 +73,13 @@ const Room = () => {
           <div
             className="flex flex-col items-start justify-center p-6 rounded-xl bg-gray-300 dark:bg-[#27273F]"
             key={t["_id"]}>
-            <h2 className="mb-1">{t["title"]}</h2>
+            <h2
+              className="mb-1 hover:cursor-pointer"
+              onClick={() => {
+                setPlaying(true);
+              }}>
+              {t["title"]}
+            </h2>
             <p className="mb-4">{t["owner"]}</p>
             <div className="bg-gradient-to-r from-orange-600 to-pink-400 pt-1">
               <p className="bg-gray-300 dark:bg-[#27273F] text-center py-3">
@@ -69,6 +89,7 @@ const Room = () => {
             <audio controls>
               <source src={t["url"]} type="audio/mpeg" />
             </audio>
+            <div id="waveform" className="border-2 w-full text-white"></div>
           </div>
         ))}
       </div>
