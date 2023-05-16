@@ -26,12 +26,12 @@ export default function LandingPage() {
           </p>
           <div>
             <a
-              className="mt-6 px-16 mr-4 py-3 bg-gradient-to-r from-orange-600 to-pink-400 rounded-md self-center font-bold hover:cursor-pointer hover:bg-none hover:bg-rose-400"
+              className="mt-6 px-16 mr-4 py-3 text-gray-300 bg-gradient-to-r from-orange-600 to-pink-400 rounded-md self-center font-bold hover:cursor-pointer hover:bg-none hover:bg-rose-400"
               href="/signup">
-              Sign Up
+              Try Now
             </a>
             <a
-              className="mt-6 px-16 py-3 ml-4 bg-gradient-to-r from-orange-600 to-pink-400 rounded-md self-center font-bold hover:cursor-pointer hover:bg-none hover:bg-rose-400"
+              className="px-16 py-3 ml-4 text-gray-300 bg-gradient-to-r from-teal-600 to-indigo-900 rounded-md self-center font-bold hover:cursor-pointer hover:bg-none hover:bg-cyan-800"
               href="/login">
               Sign In
             </a>

@@ -69,10 +69,10 @@ const SignUpForm = () => {
     <div className="flex min-h-full min-w-full flex-col items-center justify-center gap-12 p-24">
       <h1 data-cy="header">Welcome to BrainBeatsFM</h1>
       <div
-        className="flex flex-col items-center justify-center w-2/6 bg-gray-300 dark:bg-[#27273F] rounded-3xl shadow-xl py-6"
+        className="flex flex-col items-center justify-center w-3/12 bg-gray-300 dark:bg-[#27273F] rounded-3xl shadow-xl py-6"
         data-cy="sign-up-form-container">
         <form
-          className="inline-flex flex-col items-center justify-center gap-6 w-4/6"
+          className="inline-flex flex-col items-center justify-center gap-6 w-4/6 text-xs"
           data-cy="sign-up-form"
           onSubmit={(e) => {
             e.preventDefault();
@@ -100,7 +100,7 @@ const SignUpForm = () => {
               Profile Picture
             </label>
             <select
-              className="w-full p-2 rounded-md text-slate-900"
+              className="w-full p-2 rounded-md text-slate-900 dark:bg-gray-700 dark:text-[#D9D9D9]"
               name="image-field"
               id="sign-up-form-image"
               onChange={handleImageChange}>
@@ -124,7 +124,7 @@ const SignUpForm = () => {
               Name
             </label>
             <input
-              className="w-full p-2 rounded-md text-slate-900"
+              className="w-full p-2 rounded-md text-slate-900 dark:bg-gray-700 dark:text-[#D9D9D9]"
               id="sign-up-form-name"
               placeholder="Name"
               type="text"
@@ -139,7 +139,7 @@ const SignUpForm = () => {
               Email
             </label>
             <input
-              className="w-full p-2 rounded-md text-slate-900"
+              className="w-full p-2 rounded-md text-slate-900 dark:bg-gray-700 dark:text-[#D9D9D9]"
               data-cy="sign-up-form-input-email"
               id="sign-up-form-email"
               placeholder="Email"
@@ -155,7 +155,7 @@ const SignUpForm = () => {
               Password
             </label>
             <input
-              className="w-full p-2 rounded-md text-slate-900"
+              className="w-full p-2 rounded-md text-slate-900 dark:bg-gray-700 dark:text-[#D9D9D9]"
               data-cy="sign-up-form-input-password"
               id="sign-up-form-password"
               placeholder="Password"

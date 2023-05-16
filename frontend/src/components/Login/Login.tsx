@@ -24,7 +24,7 @@ const LoginForm = () => {
       console.log(response);
     } else {
       let data = await response.json();
-      
+
       console.log(data);
       window.localStorage.setItem("username", data.username);
       window.localStorage.setItem("password", data.password);
@@ -33,29 +33,31 @@ const LoginForm = () => {
       window.localStorage.setItem("userID", data.userID);
       await router.push("/rooms");
     }
-  }
+  };
 
   const handleEmailChange = (event) => {
-    setEmail(event.target.value)
-  }
+    setEmail(event.target.value);
+  };
 
   const handlePasswordChange = (event) => {
-    setPassword(event.target.value)
-  }
+    setPassword(event.target.value);
+  };
 
   return (
     <div className="flex min-h-screen min-w-screen flex-col items-center justify-center gap-12 p-24">
       <h1 data-cy="header">BrainBeatsFM</h1>
       <div
-        className="py-12 flex flex-col items-center w-2/5 bg-gray-300 dark:bg-slate-800 rounded-3xl"
+        className="flex flex-col items-center justify-center w-3/12 bg-gray-300 dark:bg-[#27273F] rounded-3xl shadow-xl py-6"
         data-cy="sign-up-form-container">
         <form
-          className="inline-flex flex-col gap-6 w-4/6"
+          className="inline-flex flex-col items-center justify-center gap-6 w-4/6 text-xs"
           data-cy="sign-up-form"
           onSubmit={handleSubmit}>
-          <h3 className="w-full border-b-4 border-gray-500 dark:border-white text-center py-3 mb-6">
-            Welcome Back!
-          </h3>
+          <div className="h-full w-full bg-gradient-to-r from-orange-600 to-pink-400 pb-1">
+            <h3 className="h-full w-full  bg-gray-300 dark:bg-[#27273F] text-center py-3">
+              Welcome Back
+            </h3>
+          </div>
           <div className="flex flex-col w-full gap-3 height-12 items-start justify-center">
             <label
               className="px-2 w-full"
@@ -64,7 +66,7 @@ const LoginForm = () => {
               Email
             </label>
             <input
-              className="w-full p-2 rounded-md text-slate-900"
+              className="w-full p-2 rounded-md text-slate-900 dark:bg-gray-700 dark:text-[#D9D9D9]"
               data-cy="sign-up-form-input-email"
               id="sign-up-form-email"
               placeholder="Email"
@@ -80,7 +82,7 @@ const LoginForm = () => {
               Password
             </label>
             <input
-              className="w-full p-2 rounded-md text-slate-900"
+              className="w-full p-2 rounded-md text-slate-900 dark:bg-gray-700 dark:text-[#D9D9D9]"
               data-cy="sign-up-form-input-password"
               id="sign-up-form-password"
               placeholder="Password"
@@ -89,16 +91,15 @@ const LoginForm = () => {
             />
           </div>
           <input
-            className="mt-6 px-16 py-3 bg-white text-gray-600 rounded-md self-center hover:cursor-pointer"
+            className="mt-6 px-16 py-3 bg-gradient-to-r from-orange-600 to-pink-400 rounded-md self-center font-bold hover:cursor-pointer hover:bg-none hover:bg-rose-400"
             data-cy="sign-up-form-btn"
             type="submit"
-            value="Login"
+            value="Sign In"
           />
         </form>
       </div>
     </div>
   );
-
 };
 
 export default LoginForm;
