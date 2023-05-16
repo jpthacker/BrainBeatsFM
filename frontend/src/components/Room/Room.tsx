@@ -66,9 +66,6 @@ const Room = () => {
                 {t["description"]}
               </p>
             </div>
-            <audio controls>
-              <source src={t["url"]} type="audio/mpeg" />
-            </audio>
           </div>
         ))}
       </div>
