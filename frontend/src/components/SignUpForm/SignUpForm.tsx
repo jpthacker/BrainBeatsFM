@@ -69,10 +69,10 @@ const SignUpForm = () => {
     <div className="flex min-h-full min-w-full flex-col items-center justify-center gap-12 p-24">
       <h1 data-cy="header">Welcome to BrainBeatsFM</h1>
       <div
-        className="py-12 flex flex-col items-center w-2/5 bg-gray-300 dark:bg-slate-800 rounded-3xl"
+        className="flex flex-col items-center justify-center w-2/6 bg-gray-300 dark:bg-[#27273F] rounded-3xl shadow-xl py-6"
         data-cy="sign-up-form-container">
         <form
-          className="inline-flex flex-col gap-6 w-4/6"
+          className="inline-flex flex-col items-center justify-center gap-6 w-4/6"
           data-cy="sign-up-form"
           onSubmit={(e) => {
             e.preventDefault();
@@ -164,7 +164,7 @@ const SignUpForm = () => {
             />
           </div>
           <input
-            className="mt-6 px-16 py-3 bg-white text-gray-600 rounded-md self-center hover:cursor-pointer"
+            className="mt-6 px-16 py-3 bg-gradient-to-r from-orange-600 to-pink-400 rounded-md self-center font-bold hover:cursor-pointer hover:bg-none hover:bg-rose-400"
             data-cy="sign-up-form-btn"
             type="submit"
             value="Submit"
