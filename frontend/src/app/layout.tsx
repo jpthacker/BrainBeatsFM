@@ -17,10 +17,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <nav className="absolute w-screen">
+        <nav className="absolute w-screen z-20">
           <Navbar />
         </nav>
-        <main className="min-h-screen min-w-screen">{children}</main>
+        <main className="min-h-screen min-w-screen dark:bg-gradient-to-r from-[#222558] to-[#202136]">
+          {children}
+        </main>
       </body>
     </html>
   );
