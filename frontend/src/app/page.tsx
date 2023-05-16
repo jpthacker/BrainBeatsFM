@@ -1,4 +1,7 @@
-import SignUpForm from "../components/SignUpForm/SignUpForm";
+"use client";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import Image from "next/image";
 
 const Home = () => {
   const router = useRouter();
@@ -27,7 +30,7 @@ const Home = () => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        name: name, 
+        name: name,
         // change
         email: email,
         password: password,
@@ -67,36 +70,38 @@ const Home = () => {
       <h1 data-cy="header">Welcome to BrainBeatsFM</h1>
       <div
         className="py-12 flex flex-col items-center w-2/5 bg-gray-300 dark:bg-slate-800 rounded-3xl"
-        data-cy="sign-up-form-container"
-      >
+        data-cy="sign-up-form-container">
         <form
           className="inline-flex flex-col gap-6 w-4/6"
           data-cy="sign-up-form"
           onSubmit={(e) => {
             e.preventDefault();
             handleSubmit();
-          }}
-        >
+          }}>
           <h3 className="w-full border-b-4 border-gray-500 dark:border-white text-center py-3 mb-6">
             Sign Up
           </h3>
           <div className="flex flex-col w-full gap-3 height-12 items-start justify-center">
             <div className="w-full flex flex-col items-center mb-6">
-              <Image className="border-2 border-white rounded-full" src={image} alt="Profile picture" width={125} height={125} />
+              <Image
+                className="border-2 border-white rounded-full"
+                src={image}
+                alt="Profile picture"
+                width={125}
+                height={125}
+              />
             </div>
             <label
               className="px-2 w-full"
               data-cy="sign-up-form-label-img"
-              htmlFor="sign-up-form-img"
-            >
+              htmlFor="sign-up-form-img">
               Profile Picture
             </label>
             <select
               className="w-full p-2 rounded-md text-slate-900"
               name="image-field"
               id="sign-up-form-image"
-              onChange={handleImageChange}
-            >
+              onChange={handleImageChange}>
               <option value="defaultPicture">Default Image</option>
               <option value="cello">Cello</option>
               <option value="clarinet">Clarinet</option>
@@ -113,8 +118,7 @@ const Home = () => {
             <label
               className="px-2 w-full"
               data-cy="sign-up-form-label-name"
-              htmlFor="sign-up-form-name"
-            >
+              htmlFor="sign-up-form-name">
               Name
             </label>
             <input
@@ -129,8 +133,7 @@ const Home = () => {
             <label
               className="px-2 w-full"
               data-cy="sign-up-form-label-email"
-              htmlFor="sign-up-form-email"
-            >
+              htmlFor="sign-up-form-email">
               Email
             </label>
             <input
@@ -146,8 +149,7 @@ const Home = () => {
             <label
               className="px-2 w-full"
               data-cy="sign-up-form-label-password"
-              htmlFor="sign-up-form-password"
-            >
+              htmlFor="sign-up-form-password">
               Password
             </label>
             <input
