@@ -1,6 +1,8 @@
 "use client";
 import React, { useEffect } from "react";
 import WaveSurfer from "wavesurfer.js";
+import { FaPlayCircle } from "react-icons/fa";
+import Image from "next/image";
 
 const Room = () => {
   interface Room {
@@ -56,6 +58,12 @@ const Room = () => {
     if (audio) {
       const wavesurfer = WaveSurfer.create({
         container: "#waveform",
+        barGap: 6,
+        barHeight: 0.6,
+        barMinHeight: 1,
+        barRadius: 6,
+        barWidth: 6,
+        progressColor: "#FC5425",
       });
       wavesurfer.load(tracks[0]["url"]);
       wavesurfer.on("ready", function () {
@@ -74,26 +82,27 @@ const Room = () => {
         <div className="w-full">
           {tracks.map((t) => (
             <div
-              className="w-full flex-1 flex-col items-start justify-center p-6 rounded-xl bg-gray-300 dark:bg-[#27273F]"
+              className="w-full flex-1 flex-col items-start justify-center p-6 rounded-xl bg-gray-300 dark:bg-[#27273F] shadow-xl"
               key={t["_id"]}>
-              <div className="flex flex-row items-center justify-between w-full">
-                <button
-                  className="hover:cursor-pointer"
+              <div className="flex flex-row items-center justify-start w-full mb-6 gap-4 px-4">
+                <FaPlayCircle
+                  className="w-24 h-24 fill-[#FC5425] hover:fill-[#E23D93] hover:cursor-pointer"
                   onClick={() => {
                     waveSurferRef.current.playPause();
-                  }}>
-                  Play/Pause
-                </button>
-                <div className="flex flex-col items-start w-6/12 border-2 border-red-600">
+                  }}
+                />
+                <div className="flex flex-col items-start w-4/12">
                   <h2 className="mb-1">{t["title"]}</h2>
                   <p className="mb-4">{t["owner"]}</p>
                 </div>
-                <div id="waveform" className="w-full text-white"></div>
+                <div id="waveform" className="w-full"></div>
               </div>
-              <div className="bg-gradient-to-r from-orange-600 to-pink-400 pt-1">
-                <p className="bg-gray-300 dark:bg-[#27273F] text-center py-3">
-                  {t["description"]}
-                </p>
+              <div className="w-full mx-24">
+                <div className="w-1/2 flex flex-col items-start justify-start bg-gradient-to-r from-orange-600 to-pink-400 pt-1">
+                  <p className="w-full bg-gray-300 dark:bg-[#27273F] py-3">
+                    {t["description"]}
+                  </p>
+                </div>
               </div>
             </div>
           ))}
@@ -117,7 +126,7 @@ const Room = () => {
       <div className="min-w-full flex flex-col items-start justify-around gap-4 py-12">
         <h2 className="capitalize">{room.data.name}</h2>
         <h3>{`A room dedicated to AI ${room.data.name} music`}</h3>
-        <div>{handleLoadCards()}</div>
+        <div className="w-full">{handleLoadCards()}</div>
       </div>
     </div>
   );
