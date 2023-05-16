@@ -45,3 +45,11 @@ p {
   font-size: 1.15rem;
   font-weight: normal;
 }
+
+.landing-page {
+  background-image: url("../../public/landing-background.png");
+}
+
+.landing-page-color {
+  background: rgba(0, 0, 0, 0.50);
+}
