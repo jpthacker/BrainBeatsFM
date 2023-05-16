@@ -1,5 +1,6 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
+import VoteButton from "../VoteButton/VoteButton";
 
 const Room = () => {
   interface Room {
@@ -48,6 +49,20 @@ const Room = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // Voting functions
+
+  const [votes, setVotes] = useState(0);
+  const [removeVoteButton, setRemoveVoteButton] = useState(false);
+  const [title, setTitle] = useState("");
+
+  const handleVoteUp = () => {
+    // Make an API call to update the vote count on the server
+    // You can use axios or fetch to make the request
+    // Update the vote count in the component state
+    setVotes(votes + 1);
+    setRemoveVoteButton(true);
+  };
+
   return (
     <div className="flex flex-col min-w-screen min-h-screen p-16">
       <div className="min-w-full flex flex-col items-start justify-around gap-4 py-12">
@@ -58,8 +73,35 @@ const Room = () => {
         {tracks.map((t) => (
           <div
             className="flex flex-col w-10/12 items-start justify-center p-6 rounded-xl bg-gray-300 dark:bg-[#27273F]"
-            key={t["_id"]}>
-            <h2 className="mb-1">{t["title"]}</h2>
+            key={t["_id"]}
+          >
+            <h2 className="mb-1">{t["title"]} </h2>
+            <div>
+              <form
+                onSubmit={async (e) => {
+                  e.preventDefault();
+
+                  let response = await fetch(`/api/tracks/${t["title"]}`, {
+                    method: "POST",
+                    headers: {
+                      "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                      votes,
+                    }),
+                  });
+                  let data = await response.json();
+                  console.log(data);
+                }}
+              >
+                <input
+                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                  type="submit"
+                  value="Vote"
+                />
+              </form>
+              <span className="ml-2">{votes}</span>
+            </div>
             <p className="mb-4">{t["owner"]}</p>
             <div className="bg-gradient-to-r from-orange-600 to-pink-400 pt-1">
               <p className="bg-gray-300 dark:bg-[#27273F] text-center py-3">
