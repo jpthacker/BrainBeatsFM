@@ -54,10 +54,10 @@ const Room = () => {
         <h2 className="capitalize">{room.data.name}</h2>
         <h3>{`A room dedicated to AI ${room.data.name} music`}</h3>
       </div>
-      <div className="">
+      <div className="w-full flex flex-col items-center justify-start">
         {tracks.map((t) => (
           <div
-            className="flex flex-col items-start justify-center p-6 rounded-xl bg-gray-300 dark:bg-[#27273F]"
+            className="flex flex-col w-10/12 items-start justify-center p-6 rounded-xl bg-gray-300 dark:bg-[#27273F]"
             key={t["_id"]}>
             <h2 className="mb-1">{t["title"]}</h2>
             <p className="mb-4">{t["owner"]}</p>
