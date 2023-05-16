@@ -38,11 +38,11 @@ const MainRoom = () => {
           }}>
           <div className="border-2">
             <div className="w-full bg-gradient-to-r from-orange-600 to-pink-400 pb-1">
-              <h1 className="w-full  bg-gray-300 dark:bg-[#27273F]">
+              <h1 className="w-full  bg-gray-300 dark:bg-[#27273F] capitalize">
                 {r["name"]}
               </h1>
             </div>
-            <p className="mt-2 text-sm font-bold">{r["description"]}</p>
+            <p className="mt-2 text-s font-bold">{r["description"]}</p>
           </div>
           <div className="w-full h-32 border-2">
             <div></div>
