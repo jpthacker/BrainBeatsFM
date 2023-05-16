@@ -1,5 +1,5 @@
 import React from "react";
-import MainRoom from "../components/MainRoom/MainRoom";
+import MainRoom from "../../components/MainRoom/MainRoom";
 
 interface Props {}
 

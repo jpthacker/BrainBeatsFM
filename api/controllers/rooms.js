@@ -16,7 +16,18 @@ const RoomController = {
     try {
       const rooms = await Room.find().exec();
       const token = await TokenGenerator.jsonwebtoken(req.user_id);
-      res.status(200).json({ room: rooms, token: token });
+      res.status(200).json({ rooms: rooms, token: token });
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ error: "Server error" });
+    }
+  },
+  Find: async (req, res) => {
+    const roomName = req.params.name;
+    try {
+      const room = await Room.findOne({ name: roomName }).exec();
+      const token = await TokenGenerator.jsonwebtoken(req.user_id);
+      res.status(200).json({ room: room, token: token });
     } catch (err) {
       console.error(err);
       res.status(500).json({ error: "Server error" });

@@ -1,8 +1,8 @@
-import Home from "../../src/app/page";
+import SignUpForm from "../../src/components/SignUpForm/SignUpForm";
 
 describe("Home", () => {
   it("renders the homepage with the correct HTML elements", () => {
-    cy.mount(<Home />);
+    cy.mount(<SignUpForm />);
     cy.get('[data-cy="header"]').should("contain.text", "BrainBeatsFM");
     cy.get('[data-cy="sign-up-form-container"]').should("be.visible");
     cy.get('[data-cy="sign-up-form"]').should("be.visible");
@@ -27,7 +27,7 @@ describe("Home", () => {
   });
 
   it("call the /users end point", () => {
-    cy.mount(<Home />);
+    cy.mount(<SignUpForm />);
     cy.intercept("POST", "/api/users", { message: "OK" }).as("newPostRequest");
     cy.get('[data-cy="sign-up-form-input-email"]').type(
       "someemail@anything.com"
