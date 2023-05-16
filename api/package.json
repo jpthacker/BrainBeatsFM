@@ -5,7 +5,7 @@
   "license": "CC BY-NC-SA",
   "private": true,
   "scripts": {
-    "test": "jest",
+    "test": "JWT_SECRET=secret jest",
     "start": "nodemon ./bin/www",
     "start:test": "MONGODB_TEST_STR='mongodb://0.0.0.0/brainbeatsfm-test' npm start"
   },

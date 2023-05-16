@@ -13,15 +13,40 @@ const UsersController = {
         res.status(400).json({ message: "Bad request" });
       });
   },
-  Index: (req, res) => {
+  Index: async (req, res) => {
     const userID = req.params.userID;
-    User.findById(userID, async (err, user) => {
-      if (err) {
-        throw err;
-      }
+    try {
+      const user = await User.findById(userID).exec();
       const token = TokenGenerator.jsonwebtoken(user._id);
       res.status(200).json({ user: user, token: token });
-    });
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ error: "Server error" });
+    }
+  },  
+  All: async (req, res) => {
+    try {
+      const users = await User.find().exec();
+      res.status(200).json({ users: users });
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ error: "Server error" });
+    }
+  }, 
+  Update: async (req, res) => {
+    const username = req.params.username;
+    try {
+      console.log(req)
+      const user = await User.findOneAndUpdate(
+        { name: username },
+        { name: req.body.name, password: req.body.password, image: req.body.image },
+        { new: true }
+      ).exec();
+      res.status(200).json({ user: user, req: req.body });
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ error: "Server error" });
+    }
   },
 };
 
