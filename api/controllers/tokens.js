@@ -14,8 +14,8 @@ const SessionsController = {
         console.log("auth error: passwords do not match");
         res.status(401).json({ message: "auth error" });
       } else {
-        const token = await TokenGenerator.jsonwebtoken(user.id);
-        res.status(201).json({ userID: user.id, token: token, message: "OK" });
+        const token = await TokenGenerator.jsonwebtoken(user._id);
+        res.status(201).json({ userID: user._id, image: user.image, username: user.name, password: user.password, token: token, message: "OK" });
       }
     });
   },

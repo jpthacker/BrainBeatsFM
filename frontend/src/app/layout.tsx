@@ -17,7 +17,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <nav className="absolute w-screen">
+        <nav className="w-screen">
           <Navbar />
         </nav>
         <main className="min-h-screen min-w-screen dark:bg-gradient-to-r from-[#222558] to to-[#202136]">

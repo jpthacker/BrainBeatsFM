@@ -13,12 +13,22 @@ const Navbar = () => {
     await router.push("/login");
   };
 
+  const routeToProfile = async () => {
+    let userID = window.localStorage.getItem("username")
+    await router.push(`/users/${userID}`)
+  }
+
   return (
     <div className="flex flex-row items-center justify-between w-full h-24 px-12">
       <picture className="flex flex-col items-center justify-center h-full w-64">
         <source srcSet={logoDark.src} media="(prefers-color-scheme: dark)" />
         <Image src={logoLight} alt="My image" width={300} height={300} />
       </picture>
+      <button
+        className="py-2 px-4 hover:pointer-cursor"
+        onClick={routeToProfile}>
+        Profile
+      </button>
       <button
         className="py-2 px-4 hover:pointer-cursor"
         onClick={removeUserDetails}>
