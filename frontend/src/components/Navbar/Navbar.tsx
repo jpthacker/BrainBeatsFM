@@ -2,8 +2,8 @@
 import React from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import logoDark from "../../../../public/brainbeats-logo-dark-md.png";
-import logoLight from "../../../../public/brainbeats-logo-light-md.png";
+import logoDark from "../../../public/brainbeats-logo-dark-md.png";
+import logoLight from "../../../public/brainbeats-logo-light-md.png";
 
 const Navbar = () => {
   const router = useRouter();
