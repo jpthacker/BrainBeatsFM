@@ -1,4 +1,3 @@
-import SignUpForm from "../components/SignUpForm/SignUpForm";
 import logoDark from "../../public/brainbeats-logo-dark-md.png";
 import logoLight from "../../public/brainbeats-logo-light-md.png";
 import Image from "next/image";

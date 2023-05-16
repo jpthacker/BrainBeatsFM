@@ -14,9 +14,9 @@ const Navbar = () => {
   };
 
   const routeToProfile = async () => {
-    let userID = window.localStorage.getItem("username")
-    await router.push(`/users/${userID}`)
-  }
+    let userID = window.localStorage.getItem("username");
+    await router.push(`/users/${userID}`);
+  };
 
   return (
     <div className="flex flex-row items-center justify-between w-full h-24 px-12">
