@@ -78,9 +78,11 @@ const SignUpForm = () => {
             e.preventDefault();
             handleSubmit();
           }}>
-          <h3 className="w-full border-b-4 border-gray-500 dark:border-white text-center py-3 mb-6">
-            Sign Up
-          </h3>
+          <div className="h-full w-full bg-gradient-to-r from-orange-600 to-pink-400 pb-1">
+            <h3 className="h-full w-full  bg-gray-300 dark:bg-[#27273F] text-center py-3">
+              Sign Up
+            </h3>
+          </div>
           <div className="flex flex-col w-full gap-3 height-12 items-start justify-center">
             <div className="w-full flex flex-col items-center mb-6">
               <Image
