@@ -23,7 +23,7 @@ const UsersController = {
       console.error(err);
       res.status(500).json({ error: "Server error" });
     }
-  },  
+  },
   All: async (req, res) => {
     try {
       const users = await User.find().exec();
@@ -32,14 +32,18 @@ const UsersController = {
       console.error(err);
       res.status(500).json({ error: "Server error" });
     }
-  }, 
+  },
   Update: async (req, res) => {
     const username = req.params.username;
     try {
-      console.log(req)
+      console.log(req);
       const user = await User.findOneAndUpdate(
         { name: username },
-        { name: req.body.name, password: req.body.password, image: req.body.image },
+        {
+          name: req.body.name,
+          password: req.body.password,
+          image: req.body.image,
+        },
         { new: true }
       ).exec();
       res.status(200).json({ user: user, req: req.body });

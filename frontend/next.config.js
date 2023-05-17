@@ -14,3 +14,5 @@ const nextConfig = {
 };
 
 module.exports = nextConfig;
+
+// http://localhost:3000/rooms/%22https:/brainbeatsfm.s3.eu-west-1.amazonaws.com/folk-pop-sample.mp3%22
