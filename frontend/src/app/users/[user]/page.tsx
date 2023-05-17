@@ -58,13 +58,12 @@ const page: FC<pageProps> = ({ params }) => {
       let data = await response.json();
       console.log(data);
       const filteredTracks = data.tracks.filter((track) => {
-        console.log(user["_id"]);
-        track.userVotes.includes(user["_id"]);
+        return track.userVotes.includes(user["_id"]) === true;
       });
       setTracks(filteredTracks);
     };
     fetchTracks();
-  }, [myProfile]);
+  }, [user]);
 
   if (userFound === false) {
     router.push("/404");
@@ -74,9 +73,39 @@ const page: FC<pageProps> = ({ params }) => {
     await router.push(`users/${user["name"]}/edit`);
   };
 
+  const loadTracksHTML = () => {
+    return (
+      <div className="h-4 mt-24 flex flex-col items-center justify-start border-2">
+        <p className="block w-10/12 text-left">Liked Songs</p>
+        {tracks.map((t) => (
+          <div
+            key={t["_id"]}
+            className="flex flex-col relative w-10/12 items-start justify-center p-6 rounded-xl bg-gray-300 dark:bg-[#27273F] mb-4">
+            <h2 className="mb-1">{t["title"]} </h2>
+            <div className="flex items-center absolute right-0 bottom-0 p-9">
+              <div className="relative bg-gradient-to-r from-orange-600 to-pink-400 rounded-full p-0.5">
+                <span className="flex items-center justify-center w-8 h-8 rounded-full bg-gray-300 dark:bg-[#27273F] text-center">
+                  {t["votes"]}
+                </span>
+              </div>
+              <div className="relative bg-gray-300 dark:bg-[#27273F] ml-6"></div>
+            </div>
+            <p className="mb-4">{t["owner"]}</p>
+            <div className="bg-gradient-to-r from-orange-600 to-pink-400 pt-1">
+              <p className="bg-gray-300 dark:bg-[#27273F] text-center py-3">
+                {t["description"]}
+              </p>
+            </div>
+            <p>{`Found in the ${t["genre"]} room`}</p>
+          </div>
+        ))}
+      </div>
+    );
+  };
+
   if (myProfile === true) {
     return (
-      <div className="w-full h-12 py-16 px-16">
+      <div className="w-full h-12 py-36 px-48">
         <div className="flex">
           <Image
             className="border-2 border-white rounded-full"
@@ -89,7 +118,6 @@ const page: FC<pageProps> = ({ params }) => {
             <div className="grid grid-cols-2 w-full">
               <div className="w-80">
                 <h2 className="w-full">{user["name"]}</h2>
-                <p className="block">GENERES GO HERE</p>
               </div>
               <div className="flex justify-end">
                 <button onClick={routeToEdit}>
@@ -103,15 +131,7 @@ const page: FC<pageProps> = ({ params }) => {
             </div>
           </div>
         </div>
-        <div
-          className="border-2 h-4"
-          onClick={() => {
-            console.log(tracks);
-          }}>
-          {tracks.map((r) => (
-            <div key={r["_id"]}>{r["title"]}</div>
-          ))}
-        </div>
+        <div>{loadTracksHTML()}</div>
       </div>
     );
   } else {
@@ -134,6 +154,7 @@ const page: FC<pageProps> = ({ params }) => {
             </div>
           </div>
         </div>
+        <div>{loadTracksHTML()}</div>
       </div>
     );
   }
