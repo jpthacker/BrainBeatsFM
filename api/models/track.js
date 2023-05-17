@@ -7,6 +7,7 @@ const TrackSchema = new mongoose.Schema({
   description: { type: String, required: true },
   url: { type: String, required: true },
   votes: { type: Number, required: true },
+  userVotes: { type: Array, required: true },
 });
 
 const Track = mongoose.model("Track", TrackSchema);

@@ -54,6 +54,7 @@ const Room = () => {
   const [votes, setVotes] = useState(0);
   const [removeVoteButton, setRemoveVoteButton] = useState(false);
   const [title, setTitle] = useState("");
+  const userID = window.localStorage.getItem("userID");
 
   const handleVoteUp = () => {
     // Make an API call to update the vote count on the server
@@ -77,30 +78,34 @@ const Room = () => {
           >
             <h2 className="mb-1">{t["title"]} </h2>
             <div>
-              <form
-                onSubmit={async (e) => {
-                  e.preventDefault();
-
-                  let response = await fetch(`/api/tracks/${t["title"]}`, {
-                    method: "POST",
-                    headers: {
-                      "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({
-                      votes,
-                    }),
-                  });
-                  let data = await response.json();
-                  console.log(data);
-                }}
-              >
-                <input
-                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                  type="submit"
-                  value="Vote"
-                />
-              </form>
-              <span className="ml-2">{votes}</span>
+              {t["userVotes"].includes(userID) ? (
+                <p>Voted!</p>
+              ) : (
+                <form
+                  onSubmit={async (e) => {
+                    let response = await fetch(`/api/tracks/${t["title"]}`, {
+                      method: "POST",
+                      headers: {
+                        "Content-Type": "application/json",
+                      },
+                      body: JSON.stringify({
+                        votes,
+                        userVotes: userID,
+                      }),
+                    });
+                    let data = await response.json();
+                    console.log(data);
+                    console.log();
+                  }}
+                >
+                  <input
+                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                    type="submit"
+                    value="Vote"
+                  />
+                </form>
+              )}
+              <span className="ml-2">{t["votes"]}</span>
             </div>
             <p className="mb-4">{t["owner"]}</p>
             <div className="bg-gradient-to-r from-orange-600 to-pink-400 pt-1">
