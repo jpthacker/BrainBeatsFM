@@ -49,20 +49,7 @@ const Room = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // Voting functions
-
-  const [votes, setVotes] = useState(0);
-  const [removeVoteButton, setRemoveVoteButton] = useState(false);
-  const [title, setTitle] = useState("");
   const userID = window.localStorage.getItem("userID");
-
-  const handleVoteUp = () => {
-    // Make an API call to update the vote count on the server
-    // You can use axios or fetch to make the request
-    // Update the vote count in the component state
-    setVotes(votes + 1);
-    setRemoveVoteButton(true);
-  };
 
   return (
     <div className="flex flex-col min-w-screen min-h-screen p-16">
@@ -89,7 +76,6 @@ const Room = () => {
                         "Content-Type": "application/json",
                       },
                       body: JSON.stringify({
-                        votes,
                         userVotes: userID,
                       }),
                     });
