@@ -24,12 +24,12 @@ const TracksController = {
     }
   },
   Votes: async (req, res) => {
-    const title = req.params.title;
+    const trackID = req.body.trackID;
     const userID = req.body.userVotes;
     try {
       console.log(req);
       const trackFound = await Track.findOneAndUpdate(
-        { title: title },
+        { _id: trackID },
         { $inc: { votes: 1 }, $push: { userVotes: userID } },
         { new: true }
       ).exec();
