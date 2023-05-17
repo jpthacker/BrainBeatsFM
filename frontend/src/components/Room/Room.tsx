@@ -1,5 +1,7 @@
 "use client";
-import React, { useEffect } from "react";
+
+import React, { useState, useEffect } from "react";
+import VoteButton from "../VoteButton/VoteButton";
 import WaveSurfer from "wavesurfer.js";
 import { FaPlayCircle } from "react-icons/fa";
 import Image from "next/image";
@@ -54,6 +56,9 @@ const Room = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+
+  const userID = window.localStorage.getItem("userID");
+
   useEffect(() => {
     if (audio) {
       const wavesurfer = WaveSurfer.create({
@@ -80,7 +85,7 @@ const Room = () => {
     if (cards) {
       return (
         <div className="w-full">
-          {tracks.map((t) => (
+          {tracks[0].map((t) => (
             <div
               className="w-full flex-1 flex-col items-start justify-center p-6 rounded-xl bg-gray-300 dark:bg-[#27273F] shadow-xl"
               key={t["_id"]}>
@@ -126,7 +131,52 @@ const Room = () => {
       <div className="min-w-full flex flex-col items-start justify-around gap-4 py-12">
         <h2 className="capitalize">{room.data.name}</h2>
         <h3>{`A room dedicated to AI ${room.data.name} music`}</h3>
-        <div className="w-full">{handleLoadCards()}</div>
+                <div className="w-full">{handleLoadCards()}</div>
+      </div>
+      <div className="w-full flex flex-col items-center justify-start">
+        {tracks.slice(1, tracks.length - 1).map((t) => (
+          <div
+            className="flex flex-col w-10/12 items-start justify-center p-6 rounded-xl bg-gray-300 dark:bg-[#27273F]"
+            key={t["_id"]}
+          >
+            <h2 className="mb-1">{t["title"]} </h2>
+            <div>
+              {t["userVotes"].includes(userID) ? (
+                <p>Voted!</p>
+              ) : (
+                <form
+                  onSubmit={async (e) => {
+                    let response = await fetch(`/api/tracks/${t["title"]}`, {
+                      method: "POST",
+                      headers: {
+                        "Content-Type": "application/json",
+                      },
+                      body: JSON.stringify({
+                        userVotes: userID,
+                      }),
+                    });
+                    let data = await response.json();
+                    console.log(data);
+                    console.log();
+                  }}
+                >
+                  <input
+                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                    type="submit"
+                    value="Vote"
+                  />
+                </form>
+              )}
+              <span className="ml-2">{t["votes"]}</span>
+            </div>
+            <p className="mb-4">{t["owner"]}</p>
+            <div className="bg-gradient-to-r from-orange-600 to-pink-400 pt-1">
+              <p className="bg-gray-300 dark:bg-[#27273F] text-center py-3">
+                {t["description"]}
+              </p>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );

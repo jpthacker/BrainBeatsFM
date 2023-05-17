@@ -23,6 +23,22 @@ const TracksController = {
       res.status(500).json({ error: "Server error" });
     }
   },
+  Votes: async (req, res) => {
+    const title = req.params.title;
+    const userID = req.body.userVotes;
+    try {
+      console.log(req);
+      const trackFound = await Track.findOneAndUpdate(
+        { title: title },
+        { $inc: { votes: 1 }, $push: { userVotes: userID } },
+        { new: true }
+      ).exec();
+      res.status(200).json({ track: trackFound, test: userID });
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ error: "Server error" });
+    }
+  },
 };
 
 module.exports = TracksController;
