@@ -30,6 +30,7 @@ const LoginForm = () => {
       window.localStorage.setItem("password", data.password);
       window.localStorage.setItem("image", data.image);
       window.localStorage.setItem("token", data.token);
+      console.log(window.localStorage.getItem("token"));
       window.localStorage.setItem("userID", data.userID);
       await router.push("/rooms");
     }
