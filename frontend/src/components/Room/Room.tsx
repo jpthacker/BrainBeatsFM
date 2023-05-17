@@ -19,7 +19,12 @@ const Room = () => {
   const [tracks, setTracks] = React.useState([]);
   const [cards, setCards] = React.useState(false);
   const [audio, setAudio] = React.useState(false);
+  const [firstTrack, setFirstTrack] = useState(tracks[0]);
   const waveSurferRef = React.useRef<any | null>(null);
+
+  React.useEffect(() => {
+    setFirstTrack(tracks[0]);
+  }, [tracks]);
 
   React.useEffect(() => {
     const localRoomName: string = window.localStorage.getItem("roomName")!;
@@ -56,7 +61,6 @@ const Room = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-
   const userID = window.localStorage.getItem("userID");
 
   useEffect(() => {
@@ -85,32 +89,30 @@ const Room = () => {
     if (cards) {
       return (
         <div className="w-full">
-          {tracks[0].map((t) => (
-            <div
-              className="w-full flex-1 flex-col items-start justify-center p-6 rounded-xl bg-gray-300 dark:bg-[#27273F] shadow-xl"
-              key={t["_id"]}>
-              <div className="flex flex-row items-center justify-start w-full mb-6 gap-4 px-4">
-                <FaPlayCircle
-                  className="w-24 h-24 fill-[#FC5425] hover:fill-[#E23D93] hover:cursor-pointer"
-                  onClick={() => {
-                    waveSurferRef.current.playPause();
-                  }}
-                />
-                <div className="flex flex-col items-start w-4/12">
-                  <h2 className="mb-1">{t["title"]}</h2>
-                  <p className="mb-4">{t["owner"]}</p>
-                </div>
-                <div id="waveform" className="w-full"></div>
+          <div
+            className="w-full flex-1 flex-col items-start justify-center p-6 rounded-xl bg-gray-300 dark:bg-[#27273F] shadow-xl"
+            key={firstTrack["_id"]}>
+            <div className="flex flex-row items-center justify-start w-full mb-6 gap-4 px-4">
+              <FaPlayCircle
+                className="w-24 h-24 fill-[#FC5425] hover:fill-[#E23D93] hover:cursor-pointer"
+                onClick={() => {
+                  waveSurferRef.current.playPause();
+                }}
+              />
+              <div className="flex flex-col items-start w-4/12">
+                <h2 className="mb-1">{firstTrack["title"]}</h2>
+                <p className="mb-4">{firstTrack["owner"]}</p>
               </div>
-              <div className="w-full mx-24">
-                <div className="w-1/2 flex flex-col items-start justify-start bg-gradient-to-r from-orange-600 to-pink-400 pt-1">
-                  <p className="w-full bg-gray-300 dark:bg-[#27273F] py-3">
-                    {t["description"]}
-                  </p>
-                </div>
+              <div id="waveform" className="w-full"></div>
+            </div>
+            <div className="w-full mx-24">
+              <div className="w-1/2 flex flex-col items-start justify-start bg-gradient-to-r from-orange-600 to-pink-400 pt-1">
+                <p className="w-full bg-gray-300 dark:bg-[#27273F] py-3">
+                  {firstTrack["description"]}
+                </p>
               </div>
             </div>
-          ))}
+          </div>
         </div>
       );
     } else {
@@ -131,14 +133,13 @@ const Room = () => {
       <div className="min-w-full flex flex-col items-start justify-around gap-4 py-12">
         <h2 className="capitalize">{room.data.name}</h2>
         <h3>{`A room dedicated to AI ${room.data.name} music`}</h3>
-                <div className="w-full">{handleLoadCards()}</div>
+        <div className="w-full">{handleLoadCards()}</div>
       </div>
       <div className="w-full flex flex-col items-center justify-start">
-        {tracks.slice(1, tracks.length - 1).map((t) => (
+        {tracks.map((t) => (
           <div
             className="flex flex-col w-10/12 items-start justify-center p-6 rounded-xl bg-gray-300 dark:bg-[#27273F]"
-            key={t["_id"]}
-          >
+            key={t["_id"]}>
             <h2 className="mb-1">{t["title"]} </h2>
             <div>
               {t["userVotes"].includes(userID) ? (
@@ -158,8 +159,7 @@ const Room = () => {
                     let data = await response.json();
                     console.log(data);
                     console.log();
-                  }}
-                >
+                  }}>
                   <input
                     className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                     type="submit"
