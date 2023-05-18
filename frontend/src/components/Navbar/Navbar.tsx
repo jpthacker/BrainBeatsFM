@@ -38,8 +38,7 @@ const Navbar = () => {
         <div>
           <Link
             href={`/users/${window.localStorage.getItem("username")}`}
-            className="py-2 px-4 hover:pointer-cursor font-bold"
-            onClick={routeToProfile}>
+            className="py-2 px-4 hover:pointer-cursor font-bold">
             Profile
           </Link>
           <div
