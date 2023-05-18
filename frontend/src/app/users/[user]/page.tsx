@@ -91,7 +91,10 @@ const page: FC<pageProps> = ({ params }) => {
               </div>
               <div className="relative bg-gray-300 dark:bg-[#27273F] ml-6"></div>
             </div>
-            <p className="mb-4">{t["owner"]}</p>
+            <Link href={`/users/${t["owner"]}`}>
+              <p className="mb-4">{t["owner"]}</p>
+            </Link>
+
             <div className="bg-gradient-to-r from-orange-600 to-pink-400 pt-1">
               <p className="bg-gray-300 dark:bg-[#27273F] text-center py-3">
                 {t["description"]}
