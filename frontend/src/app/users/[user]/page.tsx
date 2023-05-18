@@ -66,9 +66,9 @@ const page: FC<pageProps> = ({ params }) => {
     fetchTracks();
   }, [user]);
 
-  // if (userFound === false) {
-  //   router.push("/404");
-  // }
+  if (userFound === false) {
+    router.push("/404");
+  }
 
   const routeToEdit = async () => {
     await router.push(`users/${user["name"]}/edit`);
@@ -82,10 +82,22 @@ const page: FC<pageProps> = ({ params }) => {
   const handleRouteToOwner = (t: { [x: string]: any }) => {
     const owner = t["owner"];
     const ownerMatch = async () => {
-      let response = await fetch(`/api/users/${owner}`);
+      let response = await fetch(`/api/users/`);
       let data = await response.json();
-      let route = data.user.name;
-      router.push(`users/${route}`);
+      console.log(
+        data.users.find((u) => {
+          u["name"].includes(owner);
+        })
+      );
+
+      const match = data.users.map((u) => {
+        u["name"] === owner;
+      });
+      if (match) {
+        router.push(`users/${owner}`);
+      } else {
+        alert("Owner not found");
+      }
     };
     ownerMatch();
   };
@@ -108,9 +120,9 @@ const page: FC<pageProps> = ({ params }) => {
               <div className="relative bg-gray-300 dark:bg-[#27273F] ml-6"></div>
             </div>
             <p
-              className="mb-4"
+              className="mb-4 hover:cursor-pointer"
               onClick={() => {
-                handleRouteToOwner(t["username"]);
+                handleRouteToOwner(t);
               }}>
               {t["owner"]}
             </p>
@@ -168,8 +180,8 @@ const page: FC<pageProps> = ({ params }) => {
     );
   } else {
     return (
-      <div className="w-full h-fit py-16 px-16 mb-48">
-        <div className="flex">
+      <div className="w-full h-screen py-36 px-48 mb-38">
+        <div className="flex h-fit mb-24">
           <Image
             className="border-2 border-white rounded-full"
             src={user["image"]}

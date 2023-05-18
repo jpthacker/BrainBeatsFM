@@ -9,10 +9,12 @@ import {
 import WaveSurfer from "wavesurfer.js";
 import { FaPlayCircle, FaCheck } from "react-icons/fa";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { forEach } from "cypress/types/lodash";
 
 const Room = () => {
+  const router = useRouter();
   interface Room {
     _id: number;
     name: string;
@@ -165,6 +167,29 @@ const Room = () => {
     }
   };
 
+  // const handleRouteToOwner = (t: { [x: string]: any }) => {
+  //   const owner = t["owner"];
+  //   const ownerMatch = async () => {
+  //     let response = await fetch(`/api/users/`);
+  //     let data = await response.json();
+  //     console.log(
+  //       data.users.find((u) => {
+  //         u["name"].includes(owner);
+  //       })
+  //     );
+
+  //     const match = data.users.map((u) => {
+  //       u["name"] === owner;
+  //     });
+  //     if (match) {
+  //       router.push(`users/${owner}`);
+  //     } else {
+  //       alert("Owner not found");
+  //     }
+  //   };
+  //   ownerMatch();
+  // };
+
   return (
     <div className="flex flex-col min-w-screen min-h-screen p-16">
       <div className="min-w-full flex flex-col items-start justify-around gap-4 pt-12">
@@ -212,7 +237,9 @@ const Room = () => {
                 </form>
               )}
             </div>
-            <p className="mb-4">{t["owner"]}</p>
+            <Link href={`users/${t["owner"]}`}>
+              <p className="mb-4">{t["owner"]}</p>
+            </Link>
             <div className="bg-gradient-to-r from-orange-600 to-pink-400 pt-1">
               <p className="bg-gray-300 dark:bg-[#27273F] text-center py-3">
                 {t["description"]}
