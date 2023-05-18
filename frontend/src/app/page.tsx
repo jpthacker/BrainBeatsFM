@@ -16,13 +16,10 @@ export default function LandingPage() {
             <Image src={logoLight} alt="My image" width={400} height={400} />
           </picture>
           <p className="text-center my-16 font-bold mx-6">
-            BrainBeatsFM is an innovative project that leverages the power of
-            artificial intelligence to create unique and personalized music
-            listening experiences. Built with cutting-edge technologies like
-            machine learning and natural language processing, this project
-            provides a platform for discovering, sharing, and creating
-            AI-generated music. With BrainBeatsFM, the future of music is at
-            your fingertips.
+            BrainBeatsFM is an innovative platform for discovering, sharing, and
+            promoting AI-generated music, providing unique and personalized
+            music listening experiences. With BrainBeatsFM, the future of music
+            is at your fingertips.
           </p>
           <div>
             <a
