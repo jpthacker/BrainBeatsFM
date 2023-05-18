@@ -87,7 +87,7 @@ const Room = () => {
         barWidth: 6,
         progressColor: "#FC5425",
       });
-      wavesurfer.load(tracks[0]["url"]);
+      wavesurfer.load(firstTrack["url"]);
       wavesurfer.on("ready", function () {
         waveSurferRef.current = wavesurfer;
         wavesurfer.play();
@@ -96,7 +96,7 @@ const Room = () => {
         wavesurfer.destroy();
       };
     }
-  }, [audio]);
+  }, [audio, firstTrack]);
 
   const handleLoadCards = () => {
     if (firstTrack === "trackloading") {
@@ -192,7 +192,7 @@ const Room = () => {
               ) : (
                 <form
                   onSubmit={async (e) => {
-                    e.preventDefault(); // Prevent the page from refreshing
+                    e.preventDefault();
                     let response = await fetch(`/api/tracks/${t["title"]}`, {
                       method: "POST",
                       headers: {
