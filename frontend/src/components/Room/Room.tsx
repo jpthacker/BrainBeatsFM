@@ -8,6 +8,7 @@ import {
 } from "@fortawesome/fontawesome-free-regular";
 import WaveSurfer from "wavesurfer.js";
 import { FaPlayCircle, FaCheck } from "react-icons/fa";
+import Link from "next/link";
 import Image from "next/image";
 import { forEach } from "cypress/types/lodash";
 
@@ -24,7 +25,7 @@ const Room = () => {
   const [tracks, setTracks] = React.useState([]);
   const [cards, setCards] = React.useState(false);
   const [audio, setAudio] = React.useState(false);
-  const [firstTrack, setFirstTrack] = useState("trackloading");
+  const [firstTrack, setFirstTrack] = useState<any>("trackloading");
   const waveSurferRef = React.useRef<any | null>(null);
   const slicedTracks = tracks.slice(1);
 
@@ -117,7 +118,9 @@ const Room = () => {
                 />
                 <div className="flex flex-col items-start w-4/12">
                   <h2 className="mb-1">{firstTrack["title"]}</h2>
-                  <p className="mb-4">{firstTrack["owner"]}</p>
+                  <Link href={`users/${firstTrack["owner"]}`}>
+                    <p className="mb-4">{firstTrack["owner"]}</p>
+                  </Link>
                 </div>
                 <div id="waveform" className="w-full"></div>
               </div>

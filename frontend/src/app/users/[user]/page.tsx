@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencilAlt } from "@fortawesome/fontawesome-free-solid";
+import Link from "next/link";
 
 interface pageProps {
   params: { name: string };
@@ -65,9 +66,9 @@ const page: FC<pageProps> = ({ params }) => {
     fetchTracks();
   }, [user]);
 
-  if (userFound === false) {
-    router.push("/404");
-  }
+  // if (userFound === false) {
+  //   router.push("/404");
+  // }
 
   const routeToEdit = async () => {
     await router.push(`users/${user["name"]}/edit`);
@@ -75,12 +76,12 @@ const page: FC<pageProps> = ({ params }) => {
 
   const loadTracksHTML = () => {
     return (
-      <div className="h-4 mt-24 flex flex-col items-center justify-start border-2">
-        <p className="block w-10/12 text-left">Liked Songs</p>
+      <div className="h-full mv-38 flex flex-col items-center justify-start">
+        <h2 className="w-10/12 text-left">Liked Songs</h2>
         {tracks.map((t) => (
           <div
             key={t["_id"]}
-            className="flex flex-col relative w-10/12 items-start justify-center p-6 rounded-xl bg-gray-300 dark:bg-[#27273F] mb-4">
+            className="mt-12 flex flex-col relative w-10/12 items-start justify-center p-6 rounded-xl bg-gray-300 dark:bg-[#27273F] mb-4">
             <h2 className="mb-1">{t["title"]} </h2>
             <div className="flex items-center absolute right-0 bottom-0 p-9">
               <div className="relative bg-gradient-to-r from-orange-600 to-pink-400 rounded-full p-0.5">
@@ -96,7 +97,11 @@ const page: FC<pageProps> = ({ params }) => {
                 {t["description"]}
               </p>
             </div>
-            <p>{`Found in the ${t["genre"]} room`}</p>
+            <Link href={`/rooms/${t["genre"]}`}>
+              <h3 className="underline decoration-orange-600 underline-offset-8">
+                Go to room
+              </h3>
+            </Link>
           </div>
         ))}
       </div>
@@ -105,8 +110,8 @@ const page: FC<pageProps> = ({ params }) => {
 
   if (myProfile === true) {
     return (
-      <div className="w-full h-12 py-36 px-48">
-        <div className="flex">
+      <div className="w-full h-screen py-36 px-48 mb-38">
+        <div className="flex h-fit mb-24">
           <Image
             className="border-2 border-white rounded-full"
             src={user["image"]}
@@ -131,12 +136,12 @@ const page: FC<pageProps> = ({ params }) => {
             </div>
           </div>
         </div>
-        <div>{loadTracksHTML()}</div>
+        <div className="mv-24">{loadTracksHTML()}</div>
       </div>
     );
   } else {
     return (
-      <div className="w-full h-12 py-16 px-16">
+      <div className="w-full h-fit py-16 px-16 mb-48">
         <div className="flex">
           <Image
             className="border-2 border-white rounded-full"
@@ -154,7 +159,7 @@ const page: FC<pageProps> = ({ params }) => {
             </div>
           </div>
         </div>
-        <div>{loadTracksHTML()}</div>
+        <div className="h-full">{loadTracksHTML()}</div>
       </div>
     );
   }
