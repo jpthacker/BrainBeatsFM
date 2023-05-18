@@ -11,7 +11,9 @@ import { FaPlayCircle, FaCheck, FaPauseCircle } from 'react-icons/fa';
 import Image from 'next/image';
 import { forEach } from 'cypress/types/lodash';
 
+
 const Room = () => {
+  const router = useRouter();
   interface Room {
     _id: number;
     name: string;
@@ -43,7 +45,6 @@ const Room = () => {
 
   React.useEffect(() => {
     const localRoomName: string = window.localStorage.getItem('roomName')!;
-
     const fetchRoom = async () => {
       let response = await fetch(`/api/rooms/${localRoomName}`, {
         method: 'get',
@@ -97,7 +98,7 @@ const Room = () => {
         wavesurfer.destroy();
       };
     }
-  }, [audio]);
+  }, [audio, firstTrack]);
 
   const handleLoadCards = () => {
     if (firstTrack === 'trackloading') {
@@ -125,15 +126,11 @@ const Room = () => {
                     <FaPlayCircle className='w-24 h-24 fill-[#FC5425] hover:fill-[#E23D93] hover:cursor-pointer' />
                   )}
                 </button>
-                {/* <FaPlayCircle
-                  className="w-24 h-24 fill-[#FC5425] hover:fill-[#E23D93] hover:cursor-pointer"
-                  onClick={() => {
-                    waveSurferRef.current.playPause();
-                  }}
-                /> */}
-                <div className='flex flex-col items-start w-4/12'>
-                  <h2 className='mb-1'>{firstTrack['title']}</h2>
-                  <p className='mb-4'>{firstTrack['owner']}</p>
+                <div className="flex flex-col items-start w-4/12">
+                  <h2 className="mb-1">{firstTrack["title"]}</h2>
+                  <Link href={`users/${firstTrack["owner"]}`}>
+                    <p className="mb-4">{firstTrack["owner"]}</p>
+                  </Link>
                 </div>
                 <div id='waveform' className='w-full'></div>
               </div>
@@ -179,7 +176,6 @@ const Room = () => {
       return null;
     }
   };
-
   return (
     <div className='flex flex-col min-w-screen min-h-screen p-16'>
       <div className='min-w-full flex flex-col items-start justify-around gap-4 pt-12'>
@@ -207,9 +203,9 @@ const Room = () => {
               ) : (
                 <form
                   onSubmit={async (e) => {
-                    e.preventDefault(); // Prevent the page from refreshing
-                    let response = await fetch(`/api/tracks/${t['title']}`, {
-                      method: 'POST',
+                    e.preventDefault();
+                    let response = await fetch(`/api/tracks/${t["title"]}`, {
+                      method: "POST",
                       headers: {
                         'Content-Type': 'application/json',
                       },
@@ -243,10 +239,12 @@ const Room = () => {
                 </form>
               )}
             </div>
-            <p className='mb-4'>{t['owner']}</p>
-            <div className='bg-gradient-to-r from-orange-600 to-pink-400 pt-1'>
-              <p className='bg-gray-300 dark:bg-[#27273F] text-center py-3'>
-                {t['description']}
+            <Link href={`users/${t["owner"]}`}>
+              <p className="mb-4">{t["owner"]}</p>
+            </Link>
+            <div className="bg-gradient-to-r from-orange-600 to-pink-400 pt-1">
+              <p className="bg-gray-300 dark:bg-[#27273F] text-center py-3">
+                {t["description"]}
               </p>
             </div>
           </div>

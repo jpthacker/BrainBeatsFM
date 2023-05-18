@@ -23,6 +23,16 @@ const TracksController = {
       res.status(500).json({ error: "Server error" });
     }
   },
+  User: async (req, res) => {
+    try {
+      const tracks = await Track.find({}).exec();
+      const token = await TokenGenerator.jsonwebtoken(req.user_id);
+      res.status(200).json({ tracks: tracks, token: token });
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ error: "Server error" });
+    }
+  },
   Votes: async (req, res) => {
     const trackID = req.body.trackID;
     const userID = req.body.userVotes;

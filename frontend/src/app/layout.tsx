@@ -18,7 +18,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <nav className="absolute w-screen z-20">{<NavbarContainer />}</nav>
-        <main className="min-h-screen min-w-screen dark:bg-gradient-to-r from-[#222558] to-[#202136]">
+        <main className="overflow-auto min-h-screen h-fit min-w-screen dark:bg-gradient-to-r from-[#222558] to-[#202136]">
           {children}
         </main>
       </body>
