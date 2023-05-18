@@ -107,8 +107,7 @@ const Room = () => {
           <div className="w-full flex flex-col items-center justify-start">
             <div
               className="flex-1 flex-col items-start justify-center mb-6 p-6 rounded-xl bg-gray-300 dark:bg-[#27273F] shadow-xl w-11/12"
-              key={firstTrack["_id"]}
-            >
+              key={firstTrack["_id"]}>
               <div className="flex flex-row items-center justify-center mb-6 gap-4 px-4">
                 <FaPlayCircle
                   className="w-24 h-24 fill-[#FC5425] hover:fill-[#E23D93] hover:cursor-pointer"
@@ -140,8 +139,7 @@ const Room = () => {
               onClick={() => {
                 setCards(true);
                 setAudio(true);
-              }}
-            >
+              }}>
               <div className="flex flex-col w-11/12 items-start justify-center p-16 rounded-xl bg-gray-300 dark:bg-[#27273F] mb-4 relative">
                 <h2 className="uppercase">
                   Currently Playing - {firstTrack["title"]}{" "}
@@ -176,8 +174,7 @@ const Room = () => {
         {slicedTracks.map((t) => (
           <div
             className="flex flex-col relative w-10/12 items-start justify-center p-6 rounded-xl bg-gray-300 dark:bg-[#27273F] mb-4"
-            key={t["_id"]}
-          >
+            key={t["_id"]}>
             <h2 className="mb-1">{t["title"]} </h2>
             <div className="flex items-center absolute right-0 bottom-0 p-9">
               <div className="relative bg-gradient-to-r from-orange-600 to-pink-400 rounded-full p-0.5">
@@ -202,8 +199,7 @@ const Room = () => {
                         userVotes: userID,
                       }),
                     });
-                  }}
-                >
+                  }}>
                   <div className="relative bg-gray-300 dark:bg-[#27273F] ml-6">
                     <input
                       className="flex cursor-pointer items-center uppercase font-bold justify-center rounded py-2 px-12 bg-gradient-to-r from-orange-600 to-pink-400 text-center"

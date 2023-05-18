@@ -46,10 +46,7 @@ p {
   font-weight: normal;
 }
 
-.landing-page {
-  background-image: url("../../public/landing-background.png");
-}
-
-.landing-page-color {
-  background: rgba(0, 0, 0, 0.50);
+input:-webkit-autofill,
+input:-webkit-autofill:focus {
+  transition: background-color 600000s 0s, color 600000s 0s;
 }
