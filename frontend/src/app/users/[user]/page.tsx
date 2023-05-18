@@ -74,6 +74,11 @@ const page: FC<pageProps> = ({ params }) => {
     await router.push(`users/${user["name"]}/edit`);
   };
 
+  const handleOpenRoom = (name: any) => {
+    // tell the app which room has been opened.
+    window.localStorage.setItem("roomName", name);
+  };
+
   const loadTracksHTML = () => {
     return (
       <div className="h-full mv-38 flex flex-col items-center justify-start">
@@ -91,7 +96,7 @@ const page: FC<pageProps> = ({ params }) => {
               </div>
               <div className="relative bg-gray-300 dark:bg-[#27273F] ml-6"></div>
             </div>
-            <Link href={`/users/${t["owner"]}`}>
+            <Link href={`/users/${t["_id"]}`}>
               <p className="mb-4">{t["owner"]}</p>
             </Link>
 
@@ -100,7 +105,11 @@ const page: FC<pageProps> = ({ params }) => {
                 {t["description"]}
               </p>
             </div>
-            <Link href={`/rooms/${t["genre"]}`}>
+            <Link
+              href={`/rooms/${t["genre"]}`}
+              onClick={() => {
+                handleOpenRoom(t["genre"]);
+              }}>
               <h3 className="underline decoration-orange-600 underline-offset-8">
                 Go to room
               </h3>
@@ -157,7 +166,6 @@ const page: FC<pageProps> = ({ params }) => {
             <div className="w-full">
               <div className="w-80">
                 <h2 className="w-full">{user["name"]}</h2>
-                <p className="block">GENRES GO HERE</p>
               </div>
             </div>
           </div>

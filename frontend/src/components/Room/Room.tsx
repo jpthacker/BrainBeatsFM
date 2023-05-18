@@ -43,7 +43,6 @@ const Room = () => {
 
   React.useEffect(() => {
     const localRoomName: string = window.localStorage.getItem("roomName")!;
-
     const fetchRoom = async () => {
       let response = await fetch(`/api/rooms/${localRoomName}`, {
         method: "get",
