@@ -59,8 +59,7 @@ const page = () => {
     <div className="flex min-h-screen min-w-screen flex-col items-center justify-center gap-12 p-24">
       <div
         className="py-12 flex flex-col items-center w-1/3 bg-gray-300 dark:bg-[#27273F] rounded-3xl shadow-xl"
-        data-cy="sign-up-form-container"
-      >
+        data-cy="sign-up-form-container">
         <form
           className="inline-flex flex-col gap-6 w-4/6"
           data-cy="sign-up-form"
@@ -71,8 +70,7 @@ const page = () => {
             window.localStorage.setItem("password", password);
             window.localStorage.setItem("image", image);
             router.push(`/users/${name}`);
-          }}
-        >
+          }}>
           <div className="h-full w-full bg-gradient-to-r from-orange-600 to-pink-400 pb-1">
             <h3 className="h-full w-full  bg-gray-300 dark:bg-[#27273F] text-center py-3">
               Edit Profile
@@ -91,16 +89,14 @@ const page = () => {
             <label
               className="px-2 w-full"
               data-cy="sign-up-form-label-img"
-              htmlFor="sign-up-form-img"
-            >
-              Profile Picture
+              htmlFor="sign-up-form-img">
+              Choose a Profile Picture
             </label>
             <select
               className="w-full p-2 rounded-md text-slate-900"
               name="image-field"
               id="sign-up-form-image"
-              onChange={handleImageChange}
-            >
+              onChange={handleImageChange}>
               <option value="defaultPicture">Default Image</option>
               <option value="cello">Cello</option>
               <option value="clarinet">Clarinet</option>
@@ -118,14 +114,13 @@ const page = () => {
             <label
               className="px-2 w-full"
               data-cy="sign-up-form-label-name"
-              htmlFor="sign-up-form-name"
-            >
-              Name - <span className="font-bold">{name}</span>
+              htmlFor="sign-up-form-name">
+              Current Name - <span className="font-bold">{name}</span>
             </label>
             <input
               className="w-full p-2 rounded-md text-slate-900 dark:bg-gray-700 dark:text-[#D9D9D9]"
               id="sign-up-form-name"
-              placeholder="Name"
+              placeholder="New Name"
               type="text"
               onChange={handleNameChange}
             />
@@ -134,15 +129,14 @@ const page = () => {
             <label
               className="px-2 w-full"
               data-cy="sign-up-form-label-password"
-              htmlFor="sign-up-form-password"
-            >
-              Password - <span className="font-bold">{password}</span>
+              htmlFor="sign-up-form-password">
+              Current Password - <span className="font-bold">(hidden)</span>
             </label>
             <input
               className="w-full p-2 rounded-md text-slate-900 dark:bg-gray-700 dark:text-[#D9D9D9]"
               data-cy="sign-up-form-input-password"
               id="sign-up-form-password"
-              placeholder="Password"
+              placeholder="New Password"
               type="password"
               onChange={handlePasswordChange}
             />
