@@ -79,6 +79,17 @@ const page: FC<pageProps> = ({ params }) => {
     window.localStorage.setItem("roomName", name);
   };
 
+  const handleRouteToOwner = (t: { [x: string]: any }) => {
+    const owner = t["owner"];
+    const ownerMatch = async () => {
+      let response = await fetch(`/api/users/${owner}`);
+      let data = await response.json();
+      let route = data.user.name;
+      router.push(`users/${route}`);
+    };
+    ownerMatch();
+  };
+
   const loadTracksHTML = () => {
     return (
       <div className="h-full mv-38 flex flex-col items-center justify-start">
@@ -96,9 +107,13 @@ const page: FC<pageProps> = ({ params }) => {
               </div>
               <div className="relative bg-gray-300 dark:bg-[#27273F] ml-6"></div>
             </div>
-            <Link href={`/users/${t["_id"]}`}>
-              <p className="mb-4">{t["owner"]}</p>
-            </Link>
+            <p
+              className="mb-4"
+              onClick={() => {
+                handleRouteToOwner(t["username"]);
+              }}>
+              {t["owner"]}
+            </p>
 
             <div className="bg-gradient-to-r from-orange-600 to-pink-400 pt-1">
               <p className="bg-gray-300 dark:bg-[#27273F] text-center py-3">
