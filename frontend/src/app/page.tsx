@@ -1,6 +1,6 @@
+import Image from "next/image";
 import logoDark from "../../public/brainbeats-logo-dark-md.png";
 import logoLight from "../../public/brainbeats-logo-light-md.png";
-import Image from "next/image";
 import bgImage from "../../public/landing-background.png";
 
 export default function LandingPage() {
