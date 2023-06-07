@@ -1,10 +1,11 @@
 "use client";
-import React, { FC, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { isEmpty } from "lodash";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencilAlt } from "@fortawesome/fontawesome-free-solid";
+import { FaPen } from "react-icons/fa";
 import Link from "next/link";
 
 interface ProfileProps {
@@ -19,9 +20,7 @@ interface User {
   password: string;
 }
 
-const Profile: React.FC<ProfileProps> = ({
-  params,
-}: ProfileProps): JSX.Element => {
+const Profile = ({ params }: ProfileProps): JSX.Element => {
   const [myProfile, setMyProfile] = useState<boolean>(false);
   const [user, setUser] = useState<User | {}>({});
   const [userFound, setUserFound] = useState<boolean>(true);
@@ -176,11 +175,10 @@ const Profile: React.FC<ProfileProps> = ({
                 <h2 className="w-full">{user["name"]}</h2>
               </div>
               <div className="flex justify-end">
-                <button onClick={routeToEdit}>
-                  <FontAwesomeIcon
-                    className="pr-2 text-orange-600"
-                    icon={faPencilAlt}
-                  />
+                <button
+                  className="flex flex-row justify-between items-center gap-4"
+                  onClick={routeToEdit}>
+                  <FaPen className="text-orange-600" />
                   Edit Profile
                 </button>
               </div>

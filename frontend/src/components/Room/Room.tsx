@@ -7,7 +7,7 @@ import {
   faCheckCircle,
 } from "@fortawesome/fontawesome-free-regular";
 import WaveSurfer from "wavesurfer.js";
-import { FaPlayCircle, FaCheck, FaPauseCircle } from "react-icons/fa";
+import { FaPlayCircle, FaPauseCircle } from "react-icons/fa";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
