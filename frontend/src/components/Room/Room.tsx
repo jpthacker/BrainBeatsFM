@@ -8,25 +8,34 @@ import {
 } from "@fortawesome/fontawesome-free-regular";
 import WaveSurfer from "wavesurfer.js";
 import { FaPlayCircle, FaPauseCircle } from "react-icons/fa";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
 
 const Room = () => {
-  const router = useRouter();
   interface Room {
     _id: number;
     name: string;
     description: string;
   }
+
+  interface Track {
+    title: string;
+    owner: string;
+    genre: string;
+    description: String;
+    url: string;
+    votes: number;
+    userVotes: string[];
+  }
+
   const [room, setRoom] = React.useState<{
     data: Room | { name: "room" };
     loading: boolean;
   }>({ data: { name: "room" }, loading: true });
-  const [tracks, setTracks] = React.useState([]);
-  const [cards, setCards] = React.useState(false);
-  const [audio, setAudio] = React.useState(false);
-  const [isPlaying, toggleIsPlaying] = useState(true);
-  const [firstTrack, setFirstTrack] = useState("trackloading");
+  const [tracks, setTracks] = React.useState<Track[] | any[]>([]);
+  const [cards, setCards] = React.useState<boolean>(false);
+  const [audio, setAudio] = React.useState<boolean>(false);
+  const [isPlaying, toggleIsPlaying] = useState<boolean>(true);
+  const [firstTrack, setFirstTrack] = useState<Track | null>(null);
   const waveSurferRef = React.useRef<any | null>(null);
   const slicedTracks = tracks.slice(1);
 
@@ -97,10 +106,10 @@ const Room = () => {
         wavesurfer.destroy();
       };
     }
-  }, [audio, firstTrack]);
+  }, [audio, firstTrack, tracks]);
 
   const handleLoadCards = () => {
-    if (firstTrack === "trackloading") {
+    if (firstTrack === null) {
       return <p>Loading...</p>;
     } else if (firstTrack && firstTrack.title) {
       if (cards) {
@@ -156,7 +165,7 @@ const Room = () => {
                 </h2>
                 <FontAwesomeIcon
                   className="absolute right-0 pr-16 text-6xl fill-[#FC5425] hover:fill-[#E23D93] hover:cursor-pointer"
-                  icon={faArrowAltCircleRight}
+                  icon={["fas", "arrow-alt-circle-right"]}
                 />
                 <div className="bg-gradient-to-r from-orange-600 to-pink-400 pb-1 w-6/12">
                   <p className="text-sm flex bg-gray-300 dark:bg-[#27273F] text-center pb-6">
@@ -193,7 +202,10 @@ const Room = () => {
               </div>
               {t["userVotes"].includes(userID) ? (
                 <p className="flex items-center uppercase justify-center p-1 ml-4 rounded-full bg-gradient-to-r from-orange-600 to-pink-400 text-center">
-                  <FontAwesomeIcon className="text-3xl" icon={faCheckCircle} />
+                  <FontAwesomeIcon
+                    className="text-3xl"
+                    icon={["fas", "check-circle"]}
+                  />
                 </p>
               ) : (
                 <form
