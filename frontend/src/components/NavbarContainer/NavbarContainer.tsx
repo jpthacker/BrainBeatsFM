@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 
 const NavbarContainer = () => {
   const pathname = usePathname();
-  const [token, setToken] = useState<any>();
+  const [token, setToken] = useState<string | null>(null);
   const getNavbar = () => {
     if (token) {
       return <Navbar />;
