@@ -2,6 +2,8 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { CustomSelect } from "../CustomSelect/CustomSelect";
+import { CustomInput } from "../CustomInput/CustomInput";
 
 const ProfileEdit = () => {
   const [name, setName] = useState<string>(
@@ -42,17 +44,16 @@ const ProfileEdit = () => {
     console.log(data);
   };
 
-  const handlePasswordChange = (event) => {
-    setPassword(event.target.value);
+  const handlePasswordChange = (value: string) => {
+    setPassword(value);
   };
 
-  const handleNameChange = (event) => {
-    setName(event.target.value);
+  const handleNameChange = (value: string) => {
+    setName(value);
   };
 
-  const handleImageChange = (event) => {
-    const selectedImage = event.target.value;
-    setImage(imageOptions[selectedImage]);
+  const handleImageChange = (value: string) => {
+    setImage(imageOptions[value]);
   };
 
   return (
@@ -92,7 +93,7 @@ const ProfileEdit = () => {
               htmlFor="sign-up-form-img">
               Choose a Profile Picture
             </label>
-            <select
+            <CustomSelect
               className="w-full p-2 rounded-md text-slate-900"
               name="image-field"
               id="sign-up-form-image"
@@ -108,7 +109,7 @@ const ProfileEdit = () => {
               <option value="rockGuitar">Rock Guitar</option>
               <option value="violin">Violin</option>
               <option value="synthwave">Synthwave</option>
-            </select>
+            </CustomSelect>
           </div>
           <div className="flex flex-col w-full gap-3 height-12 items-start justify-center">
             <label
@@ -117,7 +118,7 @@ const ProfileEdit = () => {
               htmlFor="sign-up-form-name">
               Current Name - <span className="font-bold">{name}</span>
             </label>
-            <input
+            <CustomInput
               className="w-full p-2 rounded-md text-slate-900 dark:bg-gray-700 dark:text-[#D9D9D9]"
               id="sign-up-form-name"
               placeholder="New Name"
@@ -132,7 +133,7 @@ const ProfileEdit = () => {
               htmlFor="sign-up-form-password">
               Current Password - <span className="font-bold">(hidden)</span>
             </label>
-            <input
+            <CustomInput
               className="w-full p-2 rounded-md text-slate-900 dark:bg-gray-700 dark:text-[#D9D9D9]"
               data-cy="sign-up-form-input-password"
               id="sign-up-form-password"
