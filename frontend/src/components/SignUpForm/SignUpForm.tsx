@@ -1,14 +1,39 @@
 "use client";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { ComponentProps, useState } from "react";
 import Image from "next/image";
+
+type CustomOnChangeProps<T> = Omit<T, "onChange"> & {
+  onChange: (value: string) => void;
+};
+
+const CustomSelect = (props: CustomOnChangeProps<ComponentProps<"select">>) => {
+  return (
+    <select
+      {...props}
+      onChange={(e) => {
+        props.onChange(e.target.value);
+      }}></select>
+  );
+};
+
+const CustomInput = (props: CustomOnChangeProps<ComponentProps<"input">>) => {
+  return (
+    <input
+      {...props}
+      onChange={(e) => {
+        props.onChange(e.target.value);
+      }}
+    />
+  );
+};
 
 const SignUpForm = () => {
   const router = useRouter();
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [image, setImage] = useState("/images/default-picture.png");
+  const [name, setName] = useState<string>();
+  const [email, setEmail] = useState<string>();
+  const [password, setPassword] = useState<string>();
+  const [image, setImage] = useState<string>("/images/default-picture.png");
 
   const imageOptions = {
     defaultPicture: "/images/default-picture.png",
@@ -42,27 +67,20 @@ const SignUpForm = () => {
     router.push("/login");
   };
 
-  const handleNameChange = (event: {
-    target: { value: React.SetStateAction<string> };
-  }) => {
-    setName(event.target.value);
+  const handleNameChange = (value: string) => {
+    setName(value);
   };
 
-  const handleEmailChange = (event: {
-    target: { value: React.SetStateAction<string> };
-  }) => {
-    setEmail(event.target.value);
+  const handleEmailChange = (value: string) => {
+    setEmail(value);
   };
 
-  const handlePasswordChange = (event: {
-    target: { value: React.SetStateAction<string> };
-  }) => {
-    setPassword(event.target.value);
+  const handlePasswordChange = (value: string) => {
+    setPassword(value);
   };
 
-  const handleImageChange = (event) => {
-    const selectedImage = event.target.value;
-    setImage(imageOptions[selectedImage]);
+  const handleImageChange = (value: string) => {
+    setImage(imageOptions[value]);
   };
 
   return (
@@ -99,7 +117,7 @@ const SignUpForm = () => {
               htmlFor="sign-up-form-img">
               Profile Picture
             </label>
-            <select
+            <CustomSelect
               className="w-full p-2 rounded-md text-slate-900 dark:bg-gray-700 dark:text-[#D9D9D9]"
               name="image-field"
               id="sign-up-form-image"
@@ -114,7 +132,7 @@ const SignUpForm = () => {
               <option value="mc">Mic Controller</option>
               <option value="rockGuitar">Rock Guitar</option>
               <option value="violin">Violin</option>
-            </select>
+            </CustomSelect>
           </div>
           <div className="flex flex-col w-full gap-3 height-12 items-start justify-center">
             <label
@@ -123,7 +141,7 @@ const SignUpForm = () => {
               htmlFor="sign-up-form-name">
               Name
             </label>
-            <input
+            <CustomInput
               className="w-full p-2 rounded-md text-slate-900 dark:bg-gray-700 dark:text-[#D9D9D9]"
               id="sign-up-form-name"
               placeholder="Name"
@@ -138,7 +156,7 @@ const SignUpForm = () => {
               htmlFor="sign-up-form-email">
               Email
             </label>
-            <input
+            <CustomInput
               className="w-full p-2 rounded-md text-slate-900 dark:bg-gray-700 dark:text-[#D9D9D9]"
               data-cy="sign-up-form-input-email"
               id="sign-up-form-email"
@@ -154,7 +172,7 @@ const SignUpForm = () => {
               htmlFor="sign-up-form-password">
               Password
             </label>
-            <input
+            <CustomInput
               className="w-full p-2 rounded-md text-slate-900 dark:bg-gray-700 dark:text-[#D9D9D9]"
               data-cy="sign-up-form-input-password"
               id="sign-up-form-password"
