@@ -3,8 +3,6 @@ import React, { useState, useEffect } from "react";
 import { isEmpty } from "lodash";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPencilAlt } from "@fortawesome/fontawesome-free-solid";
 import { FaPen } from "react-icons/fa";
 import Link from "next/link";
 
@@ -20,11 +18,21 @@ interface User {
   password: string;
 }
 
-const Profile = ({ params }: ProfileProps): JSX.Element => {
+interface Track {
+  title: string;
+  owner: string;
+  genre: string;
+  description: string;
+  url: string;
+  votes: number;
+  userVotes: string[];
+}
+
+const Profile = ({ params }: ProfileProps) => {
   const [myProfile, setMyProfile] = useState<boolean>(false);
   const [user, setUser] = useState<User | {}>({});
   const [userFound, setUserFound] = useState<boolean>(true);
-  const [tracks, setTracks] = useState<any[]>([]);
+  const [tracks, setTracks] = useState<Track[]>([]);
   const router = useRouter();
 
   useEffect(() => {
@@ -77,32 +85,31 @@ const Profile = ({ params }: ProfileProps): JSX.Element => {
     fetchTracks();
   }, [user]);
 
-  if (userFound === false) {
+  if (!userFound) {
     router.push("/404");
   }
 
-  const routeToEdit = async () => {
-    await router.push(`users/${user["name"]}/edit`);
+  const redirectToEdit = () => {
+    router.push(`users/${user["name"]}/edit`);
   };
 
-  const handleOpenRoom = (name: any) => {
-    // tell the app which room has been opened.
+  const handleOpenRoom = (name: string) => {
     window.localStorage.setItem("roomName", name);
   };
 
-  const handleRouteToOwner = (t: { [x: string]: any }) => {
-    const owner = t["owner"];
+  const handleRouteToOwner = (track: Track) => {
+    const owner = track["owner"];
     const ownerMatch = async () => {
       let response = await fetch(`/api/users/`);
       let data = await response.json();
       console.log(
-        data.users.find((u: { [x: string]: string | any[] }) => {
-          u["name"].includes(owner);
+        data.users.find((user: User) => {
+          user["name"].includes(owner);
         })
       );
 
-      const match = data.users.map((u: { [x: string]: any }) => {
-        u["name"] === owner;
+      const match = data.users.map((user: User) => {
+        user["name"] === owner;
       });
       if (match) {
         router.push(`users/${owner}`);
@@ -113,104 +120,83 @@ const Profile = ({ params }: ProfileProps): JSX.Element => {
     ownerMatch();
   };
 
-  const loadTracksHTML = () => {
-    return (
-      <div className="h-full mv-38 flex flex-col items-center justify-start">
-        <h2 className="w-10/12 text-left">Liked Songs</h2>
-        {tracks.map((t) => (
-          <div
-            key={t["_id"]}
-            className="mt-12 flex flex-col relative w-10/12 items-start justify-center p-6 rounded-xl bg-gray-300 dark:bg-[#27273F] mb-4">
-            <h2 className="mb-1">{t["title"]} </h2>
-            <div className="flex items-center absolute right-0 bottom-0 p-9">
-              <div className="relative bg-gradient-to-r from-orange-600 to-pink-400 rounded-full p-0.5">
-                <span className="flex items-center justify-center w-8 h-8 rounded-full bg-gray-300 dark:bg-[#27273F] text-center">
-                  {t["votes"]}
-                </span>
-              </div>
-              <div className="relative bg-gray-300 dark:bg-[#27273F] ml-6"></div>
-            </div>
-            <p
-              className="mb-4 hover:cursor-pointer"
-              onClick={() => {
-                handleRouteToOwner(t);
-              }}>
-              {t["owner"]}
-            </p>
-
-            <div className="bg-gradient-to-r from-orange-600 to-pink-400 pt-1">
-              <p className="bg-gray-300 dark:bg-[#27273F] text-center py-3">
-                {t["description"]}
-              </p>
-            </div>
-            <Link
-              href={`/rooms/${t["genre"]}`}
-              onClick={() => {
-                handleOpenRoom(t["genre"]);
-              }}>
-              <h3 className="underline decoration-orange-600 underline-offset-8">
-                Go to room
-              </h3>
-            </Link>
-          </div>
-        ))}
-      </div>
-    );
+  const loadEditProfileBtn = () => {
+    if (myProfile) {
+      return (
+        <div className="flex justify-end">
+          <button
+            className="flex flex-row justify-between items-center gap-4"
+            onClick={redirectToEdit}>
+            <FaPen className="text-orange-600" />
+            Edit Profile
+          </button>
+        </div>
+      );
+    }
   };
 
-  if (myProfile === true) {
-    return (
-      <div className="w-full h-screen py-36 px-48 mb-38">
-        <div className="flex h-fit mb-24">
-          <Image
-            className="border-2 border-white rounded-full"
-            src={user["image"]}
-            alt="Profile picture"
-            width={250}
-            height={250}
-          />
-          <div className="flex min-h-full w-full flex-row items-center ml-16">
-            <div className="grid grid-cols-2 w-full">
-              <div className="w-80">
-                <h2 className="w-full">{user["name"]}</h2>
-              </div>
-              <div className="flex justify-end">
-                <button
-                  className="flex flex-row justify-between items-center gap-4"
-                  onClick={routeToEdit}>
-                  <FaPen className="text-orange-600" />
-                  Edit Profile
-                </button>
-              </div>
+  return (
+    <div className="w-full h-screen py-36 px-48 mb-38">
+      <div className="flex h-fit mb-24">
+        <Image
+          className="border-2 border-white rounded-full"
+          src={user["image"]}
+          alt="Profile picture"
+          width={250}
+          height={250}
+        />
+        <div className="flex min-h-full w-full flex-row items-center ml-16">
+          <div className="grid grid-cols-2 w-full">
+            <div className="w-80">
+              <h2 className="w-full">{user["name"]}</h2>
             </div>
+            {loadEditProfileBtn()}
           </div>
         </div>
-        <div className="mv-24">{loadTracksHTML()}</div>
       </div>
-    );
-  } else {
-    return (
-      <div className="w-full h-screen py-36 px-48 mb-38">
-        <div className="flex h-fit mb-24">
-          <Image
-            className="border-2 border-white rounded-full"
-            src={user["image"]}
-            alt="Profile picture"
-            width={250}
-            height={250}
-          />
-          <div className="flex min-h-full w-full flex-row items-center ml-16">
-            <div className="w-full">
-              <div className="w-80">
-                <h2 className="w-full">{user["name"]}</h2>
+      <div className="mv-24">
+        <div className="h-full mv-38 flex flex-col items-center justify-start">
+          <h2 className="w-10/12 text-left">Liked Songs</h2>
+          {tracks.map((track: Track) => (
+            <div
+              key={track["_id"]}
+              className="mt-12 flex flex-col relative w-10/12 items-start justify-center p-6 rounded-xl bg-gray-300 dark:bg-[#27273F] mb-4">
+              <h2 className="mb-1">{track["title"]} </h2>
+              <div className="flex items-center absolute right-0 bottom-0 p-9">
+                <div className="relative bg-gradient-to-r from-orange-600 to-pink-400 rounded-full p-0.5">
+                  <span className="flex items-center justify-center w-8 h-8 rounded-full bg-gray-300 dark:bg-[#27273F] text-center">
+                    {track["votes"]}
+                  </span>
+                </div>
+                <div className="relative bg-gray-300 dark:bg-[#27273F] ml-6"></div>
               </div>
+              <p
+                className="mb-4 hover:cursor-pointer"
+                onClick={() => {
+                  handleRouteToOwner(track);
+                }}>
+                {track["owner"]}
+              </p>
+              <div className="bg-gradient-to-r from-orange-600 to-pink-400 pt-1">
+                <p className="bg-gray-300 dark:bg-[#27273F] text-center py-3">
+                  {track["description"]}
+                </p>
+              </div>
+              <Link
+                href={`/rooms/${track["genre"]}`}
+                onClick={() => {
+                  handleOpenRoom(track["genre"]);
+                }}>
+                <h3 className="underline decoration-orange-600 underline-offset-8">
+                  Go to room
+                </h3>
+              </Link>
             </div>
-          </div>
+          ))}
         </div>
-        <div className="h-full">{loadTracksHTML()}</div>
       </div>
-    );
-  }
+    </div>
+  );
 };
 
 export default Profile;

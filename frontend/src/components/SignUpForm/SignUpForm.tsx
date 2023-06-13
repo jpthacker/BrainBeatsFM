@@ -2,33 +2,10 @@
 import { useRouter } from "next/navigation";
 import { ComponentProps, useState } from "react";
 import Image from "next/image";
+import { CustomSelect } from "../CustomSelect/CustomSelect";
+import { CustomInput } from "../CustomInput/CustomInput";
 
-type CustomOnChangeProps<T> = Omit<T, "onChange"> & {
-  onChange: (value: string) => void;
-};
-
-const CustomSelect = (props: CustomOnChangeProps<ComponentProps<"select">>) => {
-  return (
-    <select
-      {...props}
-      onChange={(e) => {
-        props.onChange(e.target.value);
-      }}></select>
-  );
-};
-
-const CustomInput = (props: CustomOnChangeProps<ComponentProps<"input">>) => {
-  return (
-    <input
-      {...props}
-      onChange={(e) => {
-        props.onChange(e.target.value);
-      }}
-    />
-  );
-};
-
-const SignUpForm = () => {
+export const SignUpForm = () => {
   const router = useRouter();
   const [name, setName] = useState<string>();
   const [email, setEmail] = useState<string>();
@@ -192,5 +169,3 @@ const SignUpForm = () => {
     </div>
   );
 };
-
-export default SignUpForm;
