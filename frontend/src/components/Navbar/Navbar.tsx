@@ -27,41 +27,22 @@ const Navbar = (props: NavBarProps) => {
     router.push("/login");
   };
 
-  const renderLinks = (): React.ReactNode => {
-    const handleLinkRoute = (route: string) => {
-      if (route === "profile") {
-        return `/users/${userPath}`;
-      } else if (route === "signin" || route === "signout") {
-        return "/login";
-      } else {
-        return `/${route}`;
-      }
-    };
+  const handleLinkRoute = (route: string) => {
+    if (route === "profile") {
+      return `/users/${userPath}`;
+    } else if (route === "signin" || route === "signout") {
+      return "/login";
+    } else {
+      return `/${route}`;
+    }
+  };
 
-    const handleLinkText = (route: string) => {
-      let linkText = route;
-      if (route.includes("sign")) {
-        linkText = route.replace(/^(.{4})(.*)$/, "$1 $2 $3");
-      }
-      return linkText.charAt(0).toUpperCase() + linkText.slice(1);
-    };
-
-    const linksJSX = props.links.map((linkName) => {
-      <div>
-        <Link
-          href={handleLinkRoute(linkName)}
-          className="py-2 px-4 hover:pointer-cursor font-bold">
-          {handleLinkText(linkName)}
-        </Link>
-        <div
-          className={
-            pathname.includes(`/${linkName}`)
-              ? "h-2 rounded-md bg-gradient-to-r from-orange-600 to-pink-400"
-              : "h-2"
-          }></div>
-      </div>;
-    });
-    return linksJSX;
+  const handleLinkText = (route: string) => {
+    let linkText = route;
+    if (route.includes("sign")) {
+      linkText = route.replace(/^(.{4})(.*)$/, "$1 $2 $3");
+    }
+    return linkText.charAt(0).toUpperCase() + linkText.slice(1);
   };
 
   return (
@@ -75,47 +56,38 @@ const Navbar = (props: NavBarProps) => {
         <Image src={logoLight} alt="My image" width={300} height={300} />
       </picture>
       <div className="flex flex-row item-center justify-between gap-12">
-        {renderLinks()}
-        {/* <div>
-          <Link
-            href={`/users/${window.localStorage.getItem("username")}`}
-            className="py-2 px-4 hover:pointer-cursor font-bold">
-            Profile
-          </Link>
-          <div
-            className={
-              pathname.includes("/users/")
-                ? "h-2 rounded-md bg-gradient-to-r from-orange-600 to-pink-400"
-                : "h-2"
-            }></div>
-        </div> */}
-        <div>
-          <Link
-            href="/rooms"
-            className="py-2 px-4 hover:pointer-cursor font-bold">
-            Rooms
-          </Link>
-          <div
-            className={
-              pathname === "/rooms"
-                ? "h-2 rounded-md bg-gradient-to-r from-orange-600 to-pink-400"
-                : "h-2"
-            }></div>
-        </div>
-        {/* <div>
-          <Link
-            href="/login"
-            className="py-2 px-4 hover:pointer-cursor font-bold"
-            onClick={removeUserDetails}>
-            Sign Out
-          </Link>
-          <div
-            className={
-              pathname === "/login"
-                ? "h-2 rounded-md bg-gradient-to-r from-orange-600 to-pink-400"
-                : "h-2"
-            }></div>
-        </div> */}
+        {props.links.map((linkName) =>
+          linkName === "signout" ? (
+            <div key={linkName}>
+              <Link
+                href={handleLinkRoute(linkName)}
+                className="py-2 px-4 hover:pointer-cursor font-bold"
+                onClick={removeUserDetails}>
+                {handleLinkText(linkName)}
+              </Link>
+              <div
+                className={
+                  pathname.includes(`/${linkName}`)
+                    ? "h-2 rounded-md bg-gradient-to-r from-orange-600 to-pink-400"
+                    : "h-2"
+                }></div>
+            </div>
+          ) : (
+            <div key={linkName}>
+              <Link
+                href={handleLinkRoute(linkName)}
+                className="py-2 px-4 hover:pointer-cursor font-bold">
+                {handleLinkText(linkName)}
+              </Link>
+              <div
+                className={
+                  pathname.includes(`/${linkName}`)
+                    ? "h-2 rounded-md bg-gradient-to-r from-orange-600 to-pink-400"
+                    : "h-2"
+                }></div>
+            </div>
+          )
+        )}
       </div>
     </div>
   );
