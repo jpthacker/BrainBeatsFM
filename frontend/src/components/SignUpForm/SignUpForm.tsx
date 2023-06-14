@@ -1,6 +1,6 @@
 "use client";
 import { useRouter } from "next/navigation";
-import { ComponentProps, useState } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import { CustomSelect } from "../CustomSelect/CustomSelect";
 import { CustomInput } from "../CustomInput/CustomInput";
@@ -169,3 +169,5 @@ export const SignUpForm = () => {
     </div>
   );
 };
+
+export default SignUpForm;
