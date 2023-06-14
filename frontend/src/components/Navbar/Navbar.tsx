@@ -19,12 +19,16 @@ const Navbar = (props: NavBarProps) => {
   useEffect(() => {
     const username = window.localStorage.getItem("username");
     setUserPath(username);
-  }, []);
+  }, [props.links]);
 
   const removeUserDetails = () => {
     window.localStorage.clear();
     console.log(window.localStorage.getItem("token"));
     router.push("/login");
+  };
+
+  const handleLogoLinkRoute = () => {
+    return props.links.includes("rooms") ? "/rooms" : "/";
   };
 
   const handleLinkRoute = (route: string) => {
@@ -50,7 +54,7 @@ const Navbar = (props: NavBarProps) => {
       <picture
         className="flex flex-col items-center justify-center h-full w-64 hover:cursor-pointer"
         onClick={() => {
-          router.push("/rooms");
+          router.push(`${handleLogoLinkRoute()}`);
         }}>
         <source srcSet={logoDark.src} media="(prefers-color-scheme: dark)" />
         <Image src={logoLight} alt="My image" width={300} height={300} />
@@ -67,7 +71,7 @@ const Navbar = (props: NavBarProps) => {
               </Link>
               <div
                 className={
-                  pathname.includes(`/${linkName}`)
+                  pathname.includes(`${handleLinkRoute(linkName)}`)
                     ? "h-2 rounded-md bg-gradient-to-r from-orange-600 to-pink-400"
                     : "h-2"
                 }></div>
@@ -81,7 +85,7 @@ const Navbar = (props: NavBarProps) => {
               </Link>
               <div
                 className={
-                  pathname.includes(`/${linkName}`)
+                  pathname.includes(`${handleLinkRoute(linkName)}`)
                     ? "h-2 rounded-md bg-gradient-to-r from-orange-600 to-pink-400"
                     : "h-2"
                 }></div>
