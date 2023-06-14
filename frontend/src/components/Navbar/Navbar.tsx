@@ -40,7 +40,7 @@ const Navbar = (props: NavBarProps) => {
   const handleLinkText = (route: string) => {
     let linkText = route;
     if (route.includes("sign")) {
-      linkText = route.replace(/^(.{4})(.*)$/, "$1 $2 $3");
+      linkText = route.replace(/^(.{4})(.*)$/, "$1 $2");
     }
     return linkText.charAt(0).toUpperCase() + linkText.slice(1);
   };
