@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { FaPen } from "react-icons/fa";
 import Link from "next/link";
+import { log } from "console";
 
 interface ProfileProps {
   params: { user: string };
@@ -44,12 +45,13 @@ const Profile = ({ params }: ProfileProps) => {
         },
       });
       let data = await response.json();
-      const filteredUser = data.users.filter(
-        (user: { name: any }) => user.name === params["user"]
+      const filteredUsers = data.users.filter(
+        (user: User) => user.name === params["user"].replace(/%20/g, " ")
       );
-      isEmpty(filteredUser)
-        ? (setUser([]), setUserFound(false))
-        : setUser(filteredUser[0]);
+      console.log(params["user"].replace(/%20/g, " "));
+      isEmpty(filteredUsers)
+        ? (setUser({}), setUserFound(false))
+        : setUser(filteredUsers[0]);
     };
     fetchUsers();
   }, [params, setUser]);
