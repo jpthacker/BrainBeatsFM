@@ -1,8 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import LoginForm from "../../components/Login/Login";
 
-const login = () => {
+export default function LoginPage() {
   return <LoginForm />;
-};
-
-export default login;
+}
