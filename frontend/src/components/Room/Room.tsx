@@ -11,22 +11,6 @@ import { FaPlayCircle, FaPauseCircle } from "react-icons/fa";
 import Link from "next/link";
 
 const Room = () => {
-  interface Room {
-    _id: number;
-    name: string;
-    description: string;
-  }
-
-  interface Track {
-    title: string;
-    owner: string;
-    genre: string;
-    description: String;
-    url: string;
-    votes: number;
-    userVotes: string[];
-  }
-
   const [room, setRoom] = React.useState<{
     data: Room | { name: "room" };
     loading: boolean;
@@ -222,7 +206,7 @@ const Room = () => {
                       }),
                     });
 
-                    const updatedTracks = tracks.map((track) => {
+                    const updatedTracks = tracks.map((track: Track) => {
                       if (track["_id"] === t["_id"]) {
                         return {
                           ...track,
