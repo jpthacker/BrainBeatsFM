@@ -1,10 +1,11 @@
 "use client";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
+import { CustomInput } from "../CustomInput/CustomInput";
 
 const LoginForm = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState<string>();
+  const [password, setPassword] = useState<string>();
   const router = useRouter();
 
   const handleSubmit = async (event: { preventDefault: () => void }) => {
@@ -21,27 +22,23 @@ const LoginForm = () => {
     if (response.status !== 201) {
       setEmail("");
       setPassword("");
-      console.log(response);
     } else {
       let data = await response.json();
-
-      console.log(data);
       window.localStorage.setItem("username", data.username);
       window.localStorage.setItem("password", data.password);
       window.localStorage.setItem("image", data.image);
       window.localStorage.setItem("token", data.token);
-      console.log(window.localStorage.getItem("token"));
       window.localStorage.setItem("userID", data.userID);
-      await router.push("/rooms");
+      router.push("/rooms");
     }
   };
 
-  const handleEmailChange = (event) => {
-    setEmail(event.target.value);
+  const handleEmailChange = (value: string) => {
+    setEmail(value);
   };
 
-  const handlePasswordChange = (event) => {
-    setPassword(event.target.value);
+  const handlePasswordChange = (value: string) => {
+    setPassword(value);
   };
 
   return (
@@ -66,7 +63,7 @@ const LoginForm = () => {
               htmlFor="sign-up-form-email">
               Email
             </label>
-            <input
+            <CustomInput
               className="w-full p-2 rounded-md text-slate-900 dark:bg-gray-700 dark:text-[#D9D9D9]"
               data-cy="sign-up-form-input-email"
               id="sign-up-form-email"
@@ -82,7 +79,7 @@ const LoginForm = () => {
               htmlFor="sign-up-form-password">
               Password
             </label>
-            <input
+            <CustomInput
               className="w-full p-2 rounded-md text-slate-900 dark:bg-gray-700 dark:text-[#D9D9D9]"
               data-cy="sign-up-form-input-password"
               id="sign-up-form-password"
