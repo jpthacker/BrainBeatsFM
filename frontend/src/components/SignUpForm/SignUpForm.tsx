@@ -33,7 +33,6 @@ export const SignUpForm = () => {
       },
       body: JSON.stringify({
         name: name,
-        // change
         email: email,
         password: password,
         image: image,

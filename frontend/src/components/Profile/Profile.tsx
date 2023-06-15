@@ -11,24 +11,6 @@ interface ProfileProps {
   params: { user: string };
 }
 
-interface User {
-  id: string;
-  image: string;
-  name: string;
-  email: string;
-  password: string;
-}
-
-interface Track {
-  title: string;
-  owner: string;
-  genre: string;
-  description: string;
-  url: string;
-  votes: number;
-  userVotes: string[];
-}
-
 const Profile = ({ params }: ProfileProps) => {
   const [myProfile, setMyProfile] = useState<boolean>(false);
   const [user, setUser] = useState<User | {}>({});
