@@ -5,4 +5,4 @@ import TokensController from "../../controllers/tokens";
 
 router.post("/", TokensController.Create);
 
-module.exports = router;
+export default router;

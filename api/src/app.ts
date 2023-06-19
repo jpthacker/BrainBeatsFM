@@ -9,7 +9,7 @@ import usersRouter from "./routes/[route]/users";
 import roomsRouter from "./routes/[route]/rooms";
 import tracksRouter from "./routes/[route]/tracks";
 
-import type { ErrorRequestHandler, NextFunction } from "express";
+import type { ErrorRequestHandler } from "express";
 
 var app = express();
 

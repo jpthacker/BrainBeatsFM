@@ -11,4 +11,4 @@ router.get("/", TracksController.User);
 router.post("/:title", TracksController.Votes);
 router.post("/", TracksController.Create);
 
-module.exports = router;
+export default router;
