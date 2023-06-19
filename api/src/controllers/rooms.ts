@@ -1,8 +1,15 @@
-const Room = require("../models/room");
-const TokenGenerator = require("../models/token_generator");
+import Room from "../models/room";
+import TokenGenerator from "../models/token_generator";
+import { Request, Response } from "express";
+
+declare module "express-serve-static-core" {
+  interface Request {
+    user_id: number;
+  }
+}
 
 const RoomController = {
-  Create: (req, res) => {
+  Create: (req: Request, res: Response) => {
     const room = new Room(req.body);
     room.save().then((err) => {
       if (err) {
@@ -12,21 +19,23 @@ const RoomController = {
       }
     });
   },
-  Index: async (req, res) => {
+
+  Index: async (req: Request, res: Response) => {
     try {
       const rooms = await Room.find().exec();
-      const token = await TokenGenerator.jsonwebtoken(req.user_id);
+      const token = TokenGenerator.jsonwebtoken(req.user_id);
       res.status(200).json({ rooms: rooms, token: token });
     } catch (err) {
       console.error(err);
       res.status(500).json({ error: "Server error" });
     }
   },
-  Find: async (req, res) => {
+
+  Find: async (req: Request, res: Response) => {
     const roomName = req.params.name;
     try {
       const room = await Room.findOne({ name: roomName }).exec();
-      const token = await TokenGenerator.jsonwebtoken(req.user_id);
+      const token = TokenGenerator.jsonwebtoken(req.user_id);
       res.status(200).json({ room: room, token: token });
     } catch (err) {
       console.error(err);
@@ -35,4 +44,4 @@ const RoomController = {
   },
 };
 
-module.exports = RoomController;
+export default RoomController;

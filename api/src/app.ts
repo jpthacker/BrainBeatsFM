@@ -1,15 +1,15 @@
-const createError = require("http-errors");
-const express = require("express");
-const path = require("path");
-const logger = require("morgan");
-const JWT = require("jsonwebtoken");
-const parser = require("body-parser");
+import createError, { HttpError } from "http-errors";
+import express from "express";
+import path from "path";
+import logger from "morgan";
+import parser from "body-parser";
 
-const indexRouter = require("./routes/[route]/index");
-const tokensRouter = require("./routes/[route]/tokens");
-const usersRouter = require("./routes/[route]/users");
-const roomsRouter = require("./routes/[route]/rooms");
-const tracksRouter = require("./routes/[route]/tracks");
+import tokensRouter from "./routes/[route]/tokens";
+import usersRouter from "./routes/[route]/users";
+import roomsRouter from "./routes/[route]/rooms";
+import tracksRouter from "./routes/[route]/tracks";
+
+import type { ErrorRequestHandler, NextFunction } from "express";
 
 var app = express();
 
@@ -27,7 +27,7 @@ app.use(function (req, res, next) {
 });
 
 // error handler
-app.use(function (err, req, res, next) {
+app.use(function (err: HttpError, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get("env") === "development" ? err : {};
@@ -35,6 +35,6 @@ app.use(function (err, req, res, next) {
   // render the error page
   res.status(err.status || 500).json({ message: err.message });
   // res.render('error');
-});
+} as ErrorRequestHandler);
 
-module.exports = app;
+export default app;

@@ -1,8 +1,15 @@
-const JWT = require("jsonwebtoken");
-const secret = process.env.JWT_SECRET;
+import JWT from "jsonwebtoken";
+
+declare const process: {
+  env: {
+    JWT_SECRET: string;
+  };
+};
+
+const secret: string = process.env.JWT_SECRET;
 
 class TokenGenerator {
-  static jsonwebtoken(user_id) {
+  static jsonwebtoken(user_id: number) {
     return JWT.sign(
       {
         user_id: user_id,
@@ -16,4 +23,4 @@ class TokenGenerator {
   }
 }
 
-module.exports = TokenGenerator;
+export default TokenGenerator;

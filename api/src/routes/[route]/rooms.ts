@@ -1,11 +1,11 @@
-var express = require("express");
+import express from "express";
 var router = express.Router();
 
-const RoomsController = require("../../controllers/rooms");
+import RoomsController from "../../controllers/rooms";
 
 /* GET users listing. */
 router.post("/", RoomsController.Create);
 router.get("/", RoomsController.Index);
 router.get("/:name", RoomsController.Find);
 
-module.exports = router;
+export default router;
