@@ -1,7 +1,7 @@
-var express = require("express");
-var router = express.Router();
+import express from "express";
+const router = express.Router();
 
-const TracksController = require("../../controllers/tracks");
+import TracksController from "../../controllers/tracks";
 
 /* GET tracks listing. */
 router.get("/:genre", TracksController.Index);

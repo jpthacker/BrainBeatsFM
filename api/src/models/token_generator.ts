@@ -10,7 +10,7 @@ declare const process: {
 const secret: string = process.env.JWT_SECRET;
 
 class TokenGenerator {
-  static jsonwebtoken(user_id: Types.ObjectId) {
+  static jsonwebtoken(user_id: Types.ObjectId | number) {
     return JWT.sign(
       {
         user_id: user_id,

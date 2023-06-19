@@ -1,8 +1,9 @@
-const Track = require("../models/track");
-const TokenGenerator = require("../models/token_generator");
+import Track from "../models/track";
+import TokenGenerator from "../models/token_generator";
+import { Request, Response } from "express";
 
 const TracksController = {
-  Create: (req, res) => {
+  Create: (req: Request, res: Response) => {
     const track = new Track(req.body);
     track.save().then((err) => {
       if (err) {
@@ -12,28 +13,34 @@ const TracksController = {
       }
     });
   },
-  Index: async (req, res) => {
+  Index: async (req: Request, res: Response) => {
     const genre = req.params.genre;
     try {
       const tracks = await Track.find({ genre: genre }).exec();
-      const token = await TokenGenerator.jsonwebtoken(req.user_id);
+      let token;
+      if (tracks) {
+        token = TokenGenerator.jsonwebtoken(req.user_id);
+      }
       res.status(200).json({ tracks: tracks, token: token });
     } catch (err) {
       console.error(err);
       res.status(500).json({ error: "Server error" });
     }
   },
-  User: async (req, res) => {
+  User: async (req: Request, res: Response) => {
     try {
       const tracks = await Track.find({}).exec();
-      const token = await TokenGenerator.jsonwebtoken(req.user_id);
+      let token;
+      if (tracks) {
+        token = TokenGenerator.jsonwebtoken(req.user_id);
+      }
       res.status(200).json({ tracks: tracks, token: token });
     } catch (err) {
       console.error(err);
       res.status(500).json({ error: "Server error" });
     }
   },
-  Votes: async (req, res) => {
+  Votes: async (req: Request, res: Response) => {
     const trackID = req.body.trackID;
     const userID = req.body.userVotes;
     try {
@@ -51,4 +58,4 @@ const TracksController = {
   },
 };
 
-module.exports = TracksController;
+export default TracksController;
