@@ -1,7 +1,7 @@
-var express = require('express');
+import express from "express";
 var router = express.Router();
 
-const UsersController = require('../../controllers/users');
+import UsersController from "../../controllers/users";
 
 /* GET users listing. */
 router.post("/", UsersController.Create);
@@ -9,4 +9,4 @@ router.post("/:username", UsersController.Update);
 router.get("/:userID", UsersController.Index);
 router.get("/", UsersController.All);
 
-module.exports = router;
+export default router;

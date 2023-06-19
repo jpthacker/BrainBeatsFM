@@ -1,8 +1,9 @@
-const User = require("../models/user");
-const TokenGenerator = require("../models/token_generator");
+import User from "../models/user";
+import TokenGenerator from "../models/token_generator";
+import { Request, Response } from "express";
 
 const UsersController = {
-  Create: (req, res) => {
+  Create: (req: Request, res: Response) => {
     const user = new User(req.body);
     user
       .save()
@@ -13,18 +14,21 @@ const UsersController = {
         res.status(400).json({ message: "Bad request" });
       });
   },
-  Index: async (req, res) => {
+  Index: async (req: Request, res: Response) => {
     const userID = req.params.userID;
     try {
       const user = await User.findById(userID).exec();
-      const token = TokenGenerator.jsonwebtoken(user._id);
+      let token;
+      if (user) {
+        token = TokenGenerator.jsonwebtoken(user._id);
+      }
       res.status(200).json({ user: user, token: token });
     } catch (err) {
       console.error(err);
       res.status(500).json({ error: "Server error" });
     }
   },
-  All: async (req, res) => {
+  All: async (req: Request, res: Response) => {
     try {
       const users = await User.find().exec();
       res.status(200).json({ users: users });
@@ -33,7 +37,7 @@ const UsersController = {
       res.status(500).json({ error: "Server error" });
     }
   },
-  Update: async (req, res) => {
+  Update: async (req: Request, res: Response) => {
     const username = req.params.username;
     try {
       console.log(req);
@@ -54,4 +58,4 @@ const UsersController = {
   },
 };
 
-module.exports = UsersController;
+export default UsersController;
