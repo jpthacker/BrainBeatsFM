@@ -1,8 +1,9 @@
-const User = require("../models/user");
-const TokenGenerator = require("../models/token_generator");
+import User from "../models/user";
+import TokenGenerator from "../models/token_generator";
+import { Request, Response } from "express";
 
 const SessionsController = {
-  Create: (req, res) => {
+  Create: (req: Request, res: Response) => {
     const email = req.body.email;
     const password = req.body.password;
 
@@ -14,11 +15,18 @@ const SessionsController = {
         console.log("auth error: passwords do not match");
         res.status(401).json({ message: "auth error" });
       } else {
-        const token = await TokenGenerator.jsonwebtoken(user._id);
-        res.status(201).json({ userID: user._id, image: user.image, username: user.name, password: user.password, token: token, message: "OK" });
+        const token = TokenGenerator.jsonwebtoken(user._id);
+        res.status(201).json({
+          userID: user._id,
+          image: user.image,
+          username: user.name,
+          password: user.password,
+          token: token,
+          message: "OK",
+        });
       }
     });
   },
 };
 
-module.exports = SessionsController;
+export default SessionsController;

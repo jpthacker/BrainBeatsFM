@@ -1,4 +1,5 @@
 import JWT from "jsonwebtoken";
+import { Types } from "mongoose";
 
 declare const process: {
   env: {
@@ -9,7 +10,7 @@ declare const process: {
 const secret: string = process.env.JWT_SECRET;
 
 class TokenGenerator {
-  static jsonwebtoken(user_id: number) {
+  static jsonwebtoken(user_id: Types.ObjectId) {
     return JWT.sign(
       {
         user_id: user_id,

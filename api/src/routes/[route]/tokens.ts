@@ -1,7 +1,7 @@
-const express = require("express");
+import express from "express";
 const router = express.Router();
 
-const TokensController = require("../../controllers/tokens");
+import TokensController from "../../controllers/tokens";
 
 router.post("/", TokensController.Create);
 
