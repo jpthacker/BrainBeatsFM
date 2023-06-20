@@ -129,7 +129,10 @@ RICH -
 
 ## useful commands
 
-- To start MongoDB: "brew services start mongodb-community@5.0"
+To start MongoDB:
+
+- MAC: "brew services start mongodb-community@5.0"
+- Windows: "sudo systemctl start mongod"
 
 ### api directory
 
@@ -140,6 +143,6 @@ RICH -
 ### frontend directory
 
 - run frontend server on localhost: "JWT_SECRET=SUPER_SECRET npm run dev"
-- run all cypress tests: "JWT_SECRET=SUPER_SECRET npm run test"
+- run all cypress tests: "JWT_SECRET=SUPER_SECRET npm run test"apt
 - run cypress component tests: "JWT_SECRET=SUPER_SECRET npm run test:unit"
 - run cypress e2e tests: "JWT_SECRET=SUPER_SECRET npm run test:feature"

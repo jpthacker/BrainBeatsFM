@@ -6,8 +6,12 @@
   "private": true,
   "scripts": {
     "test": "JWT_SECRET=secret jest",
+    "build": "rimraf dist && npx tsc",
+    "prestart": "npm run build",
     "start": "node ./bin/www",
-    "start:test": "MONGODB_TEST_STR='mongodb://0.0.0.0/brainbeatsfm-test' npm start"
+    "preserve": "npm run build",
+    "serve": "concurrently \"npx tsc -w\"  \"nodemon ./bin/www\"",
+    "serve:test": "MONGODB_TEST_STR='mongodb://0.0.0.0/brainbeatsfm-test' npm run serve"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
@@ -26,6 +30,7 @@
     "@types/debug": "^4.1.8",
     "@types/express": "^4.17.17",
     "@types/http-errors": "^2.0.1",
+    "@types/jsonwebtoken": "^9.0.2",
     "@types/morgan": "^1.9.4",
     "@types/node": "^20.3.1",
     "concurrently": "^8.2.0",
