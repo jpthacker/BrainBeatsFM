@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const TrackSchema = new mongoose.Schema({
   title: { type: String, required: true },
@@ -12,4 +12,4 @@ const TrackSchema = new mongoose.Schema({
 
 const Track = mongoose.model("Track", TrackSchema);
 
-module.exports = Track;
+export default Track;
