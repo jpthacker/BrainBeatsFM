@@ -137,7 +137,7 @@ To start MongoDB:
 ### api directory
 
 - connect to the database (cloud): "JWT_SECRET=SUPER_SECRET npm run start"
-- connect to the test database (local): "JWT_SECRET=SUPER_SECRET npm run start:test"
+- connect to the test database (local): "JWT_SECRET=SUPER_SECRET npm run serve:test"
 - run backend tests: "JWT_SECRET=SUPER_SECRET npm run test"
 
 ### frontend directory
