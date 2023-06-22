@@ -2,24 +2,31 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import Link from "next/link";
 import logoDark from "../../../public/brainbeats-logo-dark-md.png";
 import logoLight from "../../../public/brainbeats-logo-light-md.png";
-import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-interface NavBarProps {
-  links: string[];
-}
+type NavLink = "profile" | "rooms" | "signout" | "signup" | "signin";
 
-const Navbar = (props: NavBarProps) => {
+const Navbar = () => {
   const router = useRouter();
   const pathname = usePathname();
   const [userPath, setUserPath] = useState<string | null>(null);
+  const [token, setToken] = useState<string | null>(null);
+  const [navProps, setNavProps] = useState<NavLink[]>(["signup", "signin"]);
+
+  useEffect(() => {
+    setToken(window.localStorage.getItem("token"));
+    token
+      ? setNavProps(["profile", "rooms", "signout"])
+      : setNavProps(["signup", "signin"]);
+  }, [pathname, token]);
 
   useEffect(() => {
     const username = window.localStorage.getItem("username");
     setUserPath(username);
-  }, [props.links]);
+  }, [navProps]);
 
   const removeUserDetails = () => {
     window.localStorage.clear();
@@ -28,7 +35,7 @@ const Navbar = (props: NavBarProps) => {
   };
 
   const handleLogoLinkRoute = () => {
-    return props.links.includes("rooms") ? "/rooms" : "/";
+    return navProps.includes("rooms") ? "/rooms" : "/";
   };
 
   const handleLinkRoute = (route: string) => {
@@ -60,7 +67,7 @@ const Navbar = (props: NavBarProps) => {
         <Image src={logoLight} alt="My image" width={300} height={300} />
       </picture>
       <div className="flex flex-row item-center justify-between gap-12">
-        {props.links.map((linkName) =>
+        {navProps.map((linkName: string) =>
           linkName === "signout" ? (
             <div key={linkName}>
               <Link
