@@ -131,7 +131,7 @@ RICH -
 
 To start MongoDB:
 
-- MAC: "brew services start mongodb-community@5.0"
+- MAC: "brew services start mongodb-community@6.0"
 - Windows: "sudo systemctl start mongod"
 
 ### api directory
