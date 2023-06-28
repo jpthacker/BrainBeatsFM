@@ -2,10 +2,6 @@
 
 import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faArrowAltCircleRight,
-  faCheckCircle,
-} from "@fortawesome/fontawesome-free-regular";
 import WaveSurfer from "wavesurfer.js";
 import { FaPlayCircle, FaPauseCircle } from "react-icons/fa";
 import Link from "next/link";
@@ -28,7 +24,9 @@ const Room = () => {
   }, [tracks]);
 
   React.useEffect(() => {
-    const sortedTracks = [...tracks].sort((a, b) => b.votes - a.votes);
+    const sortedTracks = [...tracks].sort(
+      (a: Track, b: Track) => b.votes - a.votes
+    );
 
     if (JSON.stringify(sortedTracks) !== JSON.stringify(tracks)) {
       setTracks(sortedTracks);

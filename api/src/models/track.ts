@@ -1,5 +1,17 @@
 import mongoose from "mongoose";
 
+export interface TrackI {
+  title: string;
+  owner: string;
+  genre: string;
+  description: string;
+  url: string;
+  votes: number;
+  userVotes: string[];
+}
+
+export interface TrackDocument extends TrackI, mongoose.Document {}
+
 const TrackSchema = new mongoose.Schema({
   title: { type: String, required: true },
   owner: { type: String, required: true },
@@ -10,6 +22,6 @@ const TrackSchema = new mongoose.Schema({
   userVotes: { type: Array, required: true },
 });
 
-const Track = mongoose.model("Track", TrackSchema);
+const Track = mongoose.model<TrackDocument>("Track", TrackSchema);
 
 export default Track;

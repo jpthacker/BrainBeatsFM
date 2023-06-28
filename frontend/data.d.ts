@@ -1,10 +1,10 @@
-interface Room {
+export interface Room {
   _id: number;
   name: string;
   description: string;
 }
 
-interface Track {
+export interface Track {
   title: string;
   owner: string;
   genre: string;
@@ -14,7 +14,7 @@ interface Track {
   userVotes: string[];
 }
 
-interface User {
+export interface User {
   id: string;
   image: string;
   name: string;

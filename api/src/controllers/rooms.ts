@@ -2,12 +2,6 @@ import Room from "../models/room";
 import TokenGenerator from "../models/token_generator";
 import { Request, Response } from "express";
 
-declare module "express-serve-static-core" {
-  interface Request {
-    user_id: number;
-  }
-}
-
 const RoomController = {
   Create: (req: Request, res: Response) => {
     const room = new Room(req.body);

@@ -14,6 +14,7 @@
     "serve:test": "MONGODB_TEST_STR='mongodb://0.0.0.0/brainbeatsfm-test' npm run serve"
   },
   "dependencies": {
+    "@typegoose/typegoose": "^11.3.0",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "dotenv": "^16.0.3",
