@@ -5,28 +5,31 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import WaveSurfer from "wavesurfer.js";
 import { FaPlayCircle, FaPauseCircle } from "react-icons/fa";
 import Link from "next/link";
+import { Room, Track } from "../../../data";
 
 const Room = () => {
   const [room, setRoom] = React.useState<{
     data: Room | { name: "room" };
     loading: boolean;
   }>({ data: { name: "room" }, loading: true });
-  const [tracks, setTracks] = React.useState<Track[] | any[]>([]);
+  const [tracks, setTracks] = React.useState<Track[] | null>(null);
   const [cards, setCards] = React.useState<boolean>(false);
   const [audio, setAudio] = React.useState<boolean>(false);
   const [isPlaying, toggleIsPlaying] = useState<boolean>(true);
   const [firstTrack, setFirstTrack] = useState<Track | null>(null);
   const waveSurferRef = React.useRef<any | null>(null);
-  const slicedTracks = tracks.slice(1);
+  const slicedTracks = tracks ? tracks.slice(1) : undefined;
 
   React.useEffect(() => {
-    setFirstTrack(tracks[0]);
+    if (tracks) {
+      setFirstTrack(tracks[0]);
+    }
   }, [tracks]);
 
   React.useEffect(() => {
-    const sortedTracks = [...tracks].sort(
-      (a: Track, b: Track) => b.votes - a.votes
-    );
+    const sortedTracks = tracks
+      ? [...tracks].sort((a: Track, b: Track) => b.votes - a.votes)
+      : null;
 
     if (JSON.stringify(sortedTracks) !== JSON.stringify(tracks)) {
       setTracks(sortedTracks);
@@ -79,7 +82,9 @@ const Room = () => {
         barWidth: 6,
         progressColor: "#FC5425",
       });
-      wavesurfer.load(tracks[0]["url"]);
+      if (tracks) {
+        wavesurfer.load(tracks[0]["url"]);
+      }
       wavesurfer.on("ready", function () {
         waveSurferRef.current = wavesurfer;
         wavesurfer.play();
