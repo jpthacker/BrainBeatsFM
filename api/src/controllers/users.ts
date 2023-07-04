@@ -1,10 +1,19 @@
 import User from "../models/user";
 import TokenGenerator from "../models/token_generator";
 import { Request, Response } from "express";
+import z from "zod";
+
+const userZodSchema = z.object({
+  image: z.string(),
+  name: z.string().max(20),
+  email: z.string().email(),
+  password: z.string().min(8),
+});
 
 const UsersController = {
   Create: (req: Request, res: Response) => {
-    const user = new User(req.body);
+    const parsedBody = userZodSchema.parse(req.body);
+    const user = new User(parsedBody);
     user
       .save()
       .then(() => {

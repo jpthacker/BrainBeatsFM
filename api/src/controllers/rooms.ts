@@ -1,7 +1,7 @@
 import Room from "../models/room";
 import TokenGenerator from "../models/token_generator";
 import { Request, Response } from "express";
-import z from "zod";
+import { z, ZodError } from "zod";
 
 const roomSchema = z.object({
   name: z.string().max(25),
@@ -10,10 +10,12 @@ const roomSchema = z.object({
 
 const RoomController = {
   Create: (req: Request, res: Response) => {
-    const parsedRoom = roomSchema.parse(req.body);
-    const room = new Room(parsedRoom);
+    const parsedBody = roomSchema.parse(req.body);
+    const room = new Room(parsedBody);
     room.save().then((err) => {
-      if (err) {
+      if (err instanceof ZodError) {
+        return { success: false, errors: err.flatten() };
+      } else if (err) {
         res.status(201).json({ message: "OK" });
       } else {
         res.status(400).json({ message: "Bad Request" });

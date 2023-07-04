@@ -5,9 +5,17 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const user_1 = __importDefault(require("../models/user"));
 const token_generator_1 = __importDefault(require("../models/token_generator"));
+const zod_1 = __importDefault(require("zod"));
+const userZodSchema = zod_1.default.object({
+    image: zod_1.default.string(),
+    name: zod_1.default.string().max(20),
+    email: zod_1.default.string().email(),
+    password: zod_1.default.string().min(8),
+});
 const UsersController = {
     Create: (req, res) => {
-        const user = new user_1.default(req.body);
+        const parsedBody = userZodSchema.parse(req.body);
+        const user = new user_1.default(parsedBody);
         user
             .save()
             .then(() => {
