@@ -1,10 +1,17 @@
 import Room from "../models/room";
 import TokenGenerator from "../models/token_generator";
 import { Request, Response } from "express";
+import z from "zod";
+
+const roomSchema = z.object({
+  name: z.string().max(25),
+  description: z.string().max(50),
+});
 
 const RoomController = {
   Create: (req: Request, res: Response) => {
-    const room = new Room(req.body);
+    const parsedRoom = roomSchema.parse(req.body);
+    const room = new Room(parsedRoom);
     room.save().then((err) => {
       if (err) {
         res.status(201).json({ message: "OK" });
