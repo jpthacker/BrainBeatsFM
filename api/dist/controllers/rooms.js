@@ -5,24 +5,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const room_1 = __importDefault(require("../models/room"));
 const token_generator_1 = __importDefault(require("../models/token_generator"));
-const zod_1 = require("zod");
-const roomSchema = zod_1.z.object({
-    name: zod_1.z.string().max(25),
-    description: zod_1.z.string().max(50),
-});
 const RoomController = {
-    Create: (req, res) => {
-        const parsedBody = roomSchema.parse(req.body);
-        const room = new room_1.default(parsedBody);
-        room.save().then((err) => {
-            if (err instanceof zod_1.ZodError) {
-            }
-            else if (err) {
-                res.status(201).json({ message: "OK" });
-            }
-            else {
-                res.status(400).json({ message: "Bad Request" });
-            }
+    Create: async (req, res) => {
+        const room = new room_1.default(req.body);
+        await room
+            .save()
+            .then(() => {
+            res.status(201).json({ message: "OK" });
+        })
+            .catch((err) => {
+            res.status(400).json({ message: "Bad request" });
         });
     },
     Index: async (req, res) => {
