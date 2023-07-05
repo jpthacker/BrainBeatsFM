@@ -11,9 +11,11 @@ exports.createRoomSchema = zod_1.default.object({
             .string({
             required_error: "Name is required",
         })
-            .max(15),
-        description: zod_1.default.string({
+            .max(15, "Name is too long - must be below 15 characters"),
+        description: zod_1.default
+            .string({
             required_error: "Description is required",
-        }),
+        })
+            .max(50, "Description is too long - must be below 50 characters"),
     }),
 });
