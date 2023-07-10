@@ -4,16 +4,17 @@ import { Request, Response } from "express";
 import { CreateUserInput } from "../schema/user.schema";
 
 const UsersController = {
-  Create: (req: Request<{}, {}, CreateUserInput["body"]>, res: Response) => {
-    const user = new User(req.body);
-    user
-      .save()
-      .then(() => {
-        res.status(201).json({ message: "OK" });
-      })
-      .catch((err) => {
-        res.status(400).json({ message: "Bad request" });
-      });
+  Create: async (
+    req: Request<{}, {}, CreateUserInput["body"]>,
+    res: Response
+  ) => {
+    try {
+      const user = new User(req.body);
+      await user.save();
+      res.status(201).json({ message: "OK" });
+    } catch (err: any) {
+      res.status(400).json({ message: "Bad request" });
+    }
   },
   Index: async (req: Request, res: Response) => {
     const userID = req.params.userID;

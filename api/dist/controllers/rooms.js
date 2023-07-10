@@ -7,15 +7,14 @@ const room_1 = __importDefault(require("../models/room"));
 const token_generator_1 = __importDefault(require("../models/token_generator"));
 const RoomController = {
     Create: async (req, res) => {
-        const room = new room_1.default(req.body);
-        await room
-            .save()
-            .then(() => {
+        try {
+            const room = new room_1.default(req.body);
+            await room.save();
             res.status(201).json({ message: "OK" });
-        })
-            .catch((err) => {
+        }
+        catch (err) {
             res.status(400).json({ message: "Bad request" });
-        });
+        }
     },
     Index: async (req, res) => {
         try {

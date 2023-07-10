@@ -3,15 +3,14 @@ import TokenGenerator from "../models/token_generator";
 import { Request, Response } from "express";
 
 const TracksController = {
-  Create: (req: Request, res: Response) => {
-    const track = new Track(req.body);
-    track.save().then((err) => {
-      if (err) {
-        res.status(201).json({ message: "OK" });
-      } else {
-        res.status(400).json({ message: "Bad Request" });
-      }
-    });
+  Create: async (req: Request, res: Response) => {
+    try {
+      const track = new Track(req.body);
+      await track.save();
+      res.status(201).json({ message: "OK" });
+    } catch (err: any) {
+      res.status(400).json({ message: "Bad Request" });
+    }
   },
   Index: async (req: Request, res: Response) => {
     const genre = req.params.genre;

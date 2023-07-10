@@ -8,15 +8,13 @@ const RoomController = {
     req: Request<{}, {}, CreateRoomInput["body"]>,
     res: Response
   ) => {
-    const room = new Room(req.body);
-    await room
-      .save()
-      .then(() => {
-        res.status(201).json({ message: "OK" });
-      })
-      .catch((err: any) => {
-        res.status(400).json({ message: "Bad request" });
-      });
+    try {
+      const room = new Room(req.body);
+      await room.save();
+      res.status(201).json({ message: "OK" });
+    } catch (err: any) {
+      res.status(400).json({ message: "Bad request" });
+    }
   },
 
   Index: async (req: Request, res: Response) => {
