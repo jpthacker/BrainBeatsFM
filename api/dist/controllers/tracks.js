@@ -6,16 +6,15 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const track_1 = __importDefault(require("../models/track"));
 const token_generator_1 = __importDefault(require("../models/token_generator"));
 const TracksController = {
-    Create: (req, res) => {
-        const track = new track_1.default(req.body);
-        track.save().then((err) => {
-            if (err) {
-                res.status(201).json({ message: "OK" });
-            }
-            else {
-                res.status(400).json({ message: "Bad Request" });
-            }
-        });
+    Create: async (req, res) => {
+        try {
+            const track = new track_1.default(req.body);
+            await track.save();
+            res.status(201).json({ message: "OK" });
+        }
+        catch (err) {
+            res.status(400).json({ message: "Bad Request" });
+        }
     },
     Index: async (req, res) => {
         const genre = req.params.genre;

@@ -6,16 +6,15 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const user_1 = __importDefault(require("../models/user"));
 const token_generator_1 = __importDefault(require("../models/token_generator"));
 const UsersController = {
-    Create: (req, res) => {
-        const user = new user_1.default(req.body);
-        user
-            .save()
-            .then(() => {
+    Create: async (req, res) => {
+        try {
+            const user = new user_1.default(req.body);
+            await user.save();
             res.status(201).json({ message: "OK" });
-        })
-            .catch((err) => {
+        }
+        catch (err) {
             res.status(400).json({ message: "Bad request" });
-        });
+        }
     },
     Index: async (req, res) => {
         const userID = req.params.userID;

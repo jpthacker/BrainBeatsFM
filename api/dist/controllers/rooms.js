@@ -6,16 +6,15 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const room_1 = __importDefault(require("../models/room"));
 const token_generator_1 = __importDefault(require("../models/token_generator"));
 const RoomController = {
-    Create: (req, res) => {
-        const room = new room_1.default(req.body);
-        room.save().then((err) => {
-            if (err) {
-                res.status(201).json({ message: "OK" });
-            }
-            else {
-                res.status(400).json({ message: "Bad Request" });
-            }
-        });
+    Create: async (req, res) => {
+        try {
+            const room = new room_1.default(req.body);
+            await room.save();
+            res.status(201).json({ message: "OK" });
+        }
+        catch (err) {
+            res.status(400).json({ message: "Bad request" });
+        }
     },
     Index: async (req, res) => {
         try {
